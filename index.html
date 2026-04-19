@@ -1424,7 +1424,10 @@ function buildWeeks(){
       el("div",{class:"wc-badge",style:{background:sc.bg,color:sc.text}},wm.score),
       el("div",{class:"wc-arrow"},"›")
     ]);
-    card.addEventListener("click",function(){S.selWeekIdx=weekNum;S.selDayIdx=0;S.weekTab="days";S.view="weekDetail";persist();render();});
+    card.addEventListener("click",function(){
+      if(!bw1Done()) return; // locked during Before Week 1
+      S.selWeekIdx=weekNum;S.selDayIdx=0;S.weekTab="days";S.view="weekDetail";persist();render();
+    });
     cards.push(card);
   })(ww);}
   return div("",[
@@ -1583,23 +1586,69 @@ function buildParking(){
 /* ══════════════════════════════════════════
    BEFORE WEEK 1 DATA
 ══════════════════════════════════════════ */
-var BW1=[
-  {id:"bw1_0",
-   label:"Clear and set up your workspace",
-   detail:"Pick one spot in your home where you will do your goal work every day. It does not have to be a dedicated office — a corner of a table is enough. Clear it completely right now. Place your planner, a pen, and anything you need within arm's reach. The rule: this surface is always clear when you are not working. Setup and teardown take zero time because nothing moves."},
-  {id:"bw1_1",
-   label:"Block your goal time in your calendar",
-   detail:"Open your calendar app and create a recurring time block for each of your goals — one block per goal, per day or per week depending on your chosen frequency. Label each block with the goal name. Set them for the same time every occurrence. You are not deciding when to work on Week 1 Day 1 — you decided right now. When the block appears on your calendar, you work. No deliberation required."},
-  {id:"bw1_2",
-   label:"Read your full Week 1 plan until nothing surprises you",
-   detail:"Go to Weeks and open Week 1. Read every single task for every day of the week. Do not skim. Read until you could describe Monday through Sunday from memory. The goal is zero surprises on Day 1. When you know what is coming, you do not have to decide — you just execute. This single step eliminates most of the friction that kills Week 1."},
-  {id:"bw1_3",
-   label:"Tell one person you are starting and set a check-in date",
-   detail:"Text or call one person — a friend, family member, or colleague — and tell them two things: what your main goal is for the next 12 weeks, and a specific date you will check in with them to share your progress. Do not be vague. Say the goal out loud and name the date. This creates a real social commitment. Research consistently shows that stated accountability with a specific date is one of the strongest predictors of follow-through."}
-];
+function getBW1(){
+  // Task 2 detail is generated from the user's actual goals
+  var goals=(S.wiz&&S.wiz.goals)||[];
+  var activeGoals=goals.filter(function(g){return g.statement||g.what;});
+
+  var calendarDetail="";
+  if(activeGoals.length){
+    var freqLabel={daily:"every day",few:"a few times a week",once:"once a week"};
+    var lines=activeGoals.map(function(g){
+      var area=getArea(g.areaId);
+      var freq=freqLabel[g.freq||"few"]||"a few times a week";
+      return """+area.icon+" "+(g.what||g.statement)+"" — block "+freq+", same time each occurrence, label it exactly this.";
+    });
+    calendarDetail="Open your calendar app and create a recurring block for each goal below. Set each block for the same time every occurrence. When the block appears, you work — no deliberation, no deciding. You are pre-committing right now so Week 1 Day 1 requires zero decisions about when to start.
+
+"+lines.join("
+
+");
+  } else {
+    calendarDetail="Open your calendar app and create a recurring time block for each of your goals. Label each block with the goal name. Set them for the same time every occurrence. When the block appears, you work — no deliberation required.";
+  }
+
+  // Task 3: show their goals as a preview to read
+  var readDetail="";
+  if(activeGoals.length){
+    var goalSummary=activeGoals.map(function(g,i){
+      var area=getArea(g.areaId);
+      var allTacs=[].concat(
+        (g.tactics||[]).filter(function(t){return t.selected;}).map(function(t){return t.text;}),
+        (g.custom||[]).filter(function(t){return t.text;}).map(function(t){return t.text;})
+      );
+      return "Goal "+(i+1)+": "+(g.statement||g.what)+"
+Weekly tactics: "+(allTacs.join(", ")||"none set yet");
+    }).join("
+
+");
+    readDetail="Read your goals and tactics below until you could describe them from memory. When Week 1 starts, nothing should surprise you — you already know what every day looks like.
+
+"+goalSummary+"
+
+Then mentally walk through a typical Monday, Tuesday, Wednesday in Week 1. Where does each tactic fit? What time of day? What will you do first? The more vividly you picture it, the more automatic it becomes on Day 1.";
+  } else {
+    readDetail="Open the Vision tab. Read your goal statements out loud. Read every tactic. Walk through a typical Monday, Tuesday, Wednesday in Week 1. Picture exactly when and where you will do each tactic. The more vividly you picture it, the more automatic it becomes on Day 1.";
+  }
+
+  return [
+    {id:"bw1_0",
+     label:"Clear and set up your workspace",
+     detail:"Pick one spot in your home where you will do your goal work every day. It does not have to be a dedicated office — a corner of a table is enough. Clear it completely right now. Place your planner, a pen, and anything you need within arm's reach. The rule: this surface is always clear when you are not working. Setup and teardown take zero time because nothing moves."},
+    {id:"bw1_1",
+     label:"Block your goal time in your calendar",
+     detail:calendarDetail},
+    {id:"bw1_2",
+     label:"Read your plan until nothing surprises you",
+     detail:readDetail},
+    {id:"bw1_3",
+     label:"Tell one person you are starting and set a check-in date",
+     detail:"Text or call one person — a friend, family member, or colleague — and tell them two things: what your main goal is for the next 12 weeks, and a specific date you will check in with them to share your progress. Do not be vague. Say the goal out loud and name the date. This creates a real social commitment. Stated accountability with a specific date is one of the strongest predictors of follow-through."}
+  ];
+}
 
 function bw1Done(){
-  return BW1.every(function(t){return S.checked[t.id]==="done";});
+  return getBW1().every(function(t){return S.checked[t.id]==="done";});
 }
 
 /* ══════════════════════════════════════════
@@ -1638,7 +1687,7 @@ function buildOrientation(){
 
   // Weekly rhythm
   el_section(body,"Your weekly rhythm");
-  body.appendChild(orientCard("📅","Every Sunday","Open Weeks, tap the current week, go to Week State, and score yourself honestly. Set your state for the coming week — Recovery, Stabilization, Maintenance, or Growth. Then read every task for next week so nothing surprises you on Monday."));
+  body.appendChild(orientCard("📅","Every Sunday","Open Weeks — this unlocks after Before Week 1 is complete. Tap the current week, go to Week State, and score yourself honestly. Set your state for the coming week — Recovery, Stabilization, Maintenance, or Growth. Then read every task for next week so nothing surprises you on Monday."));
   body.appendChild(orientCard("✦","Vision and Goals","Your 3-year vision and 12-week goal statements live in the Vision tab. Tap Edit at any time to go back into the setup and adjust anything. Your goals are not locked in."));
   body.appendChild(orientCard("🅿️","Parking Lot","Anything you want to remember but not act on right now goes here. Future ideas, deferred decisions, things for next cycle. Get them out of your head and into the Parking Lot so they do not clutter your execution."));
 
@@ -1670,8 +1719,9 @@ function orientCard(icon,title,body){
    BEFORE WEEK 1 SCREEN
 ══════════════════════════════════════════ */
 function buildBeforeWeek1(){
-  var done=BW1.filter(function(t){return S.checked[t.id]==="done";}).length;
-  var total=BW1.length;
+  var tasks=getBW1();
+  var done=tasks.filter(function(t){return S.checked[t.id]==="done";}).length;
+  var total=tasks.length;
   var pct=Math.round((done/total)*100);
   var allDone=done===total;
 
@@ -1724,7 +1774,7 @@ function buildBeforeWeek1(){
   ]));
 
   // Tasks — use the same taskItem pattern but with bw1 styling
-  children.push(div("card-wrap",BW1.map(function(task){
+  children.push(div("card-wrap",tasks.map(function(task){
     return bw1TaskItem(task);
   })));
 
