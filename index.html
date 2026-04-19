@@ -1270,6 +1270,24 @@ function updatePreview(gIdx){
 /* ==========================================
    TASK ITEM
 ========================================== */
+function readOnlyTaskItem(task){
+  // Preview mode: shows task label and block chip but no interactive elements
+  var bs=BLOCK_STYLE[task.block]||{bg:"#eee",text:"#666"};
+  var open=!!S.openTasks[task.id];
+  var row=div("task-main",[
+    el("div",{style:{width:"26px",height:"26px",borderRadius:"7px",border:"1.5px solid var(--border)",background:"var(--sand-d)",flexShrink:"0",marginTop:"1px"}},null),
+    div("task-content",[
+      el("div",{class:"task-label",style:{color:"var(--ink-l)"}},task.label),
+      div("task-meta",[el("span",{class:"block-chip",style:{background:bs.bg,color:bs.text,opacity:".7"}},task.block)])
+    ]),
+    el("span",{class:"task-chevron"+(open?" open":""),onClick:function(e){e.stopPropagation();S.openTasks[task.id]=!S.openTasks[task.id];persist();render();}},"›")
+  ]);
+  var item=div("task-item",[row]);
+  item.addEventListener("click",function(){S.openTasks[task.id]=!S.openTasks[task.id];persist();render();});
+  if(open&&task.detail) item.appendChild(el("div",{class:"task-detail",style:{color:"var(--ink-l)"}},task.detail));
+  return item;
+}
+
 function taskItem(task){
   var id=task.id,status=S.checked[id]||"",isDone=status==="done",isSkip=status==="skip",open=!!S.openTasks[id];
   var bs=BLOCK_STYLE[task.block]||{bg:"#eee",text:"#666"};
@@ -1329,25 +1347,30 @@ function buildEditModal(){
 ========================================== */
 function bottomNav(){
   var bw1Complete=bw1Done();
+  var inBW1=!bw1Complete;
   var items=[
-    {icon:"☀️",label:"Today",    v:"today",      locked:!bw1Complete},
-    {icon:"📅",label:"Weeks",    v:"weeks",      locked:!bw1Complete},
+    {icon:"☀️",label:"Today",    v:"today",      locked:inBW1},
+    {icon:"📅",label:"Weeks",    v:"weeks",      locked:false},
     {icon:"✦", label:"Vision",   v:"visionGoals",locked:false},
     {icon:"📊",label:"Measures", v:"measures",   locked:false},
     {icon:"📖",label:"Reference",v:"reference",  locked:false},
     {icon:"🅿️",label:"Parking",  v:"parking",    locked:false}
   ];
-  // Before Week 1 active state
-  var inBW1=S.view==="beforeWeek1"||(S.view==="today"&&!bw1Complete)||(S.view==="weeks"&&!bw1Complete);
+  var currentView=S.view;
   return div("bottom-nav",items.map(function(item){
-    var active=S.view===item.v||(item.v==="weeks"&&S.view==="weekDetail");
-    if(item.locked) active=false;
+    var active=currentView===item.v||(item.v==="weeks"&&currentView==="weekDetail");
+    // Before Week 1 screen counts as neither Today nor Weeks being active
+    if(currentView==="beforeWeek1") active=false;
     return el("button",{
       class:"bn-btn",
-      style:item.locked?{opacity:".35",cursor:"not-allowed"}:{},
+      style:item.locked?{opacity:".4",cursor:"pointer"}:{},
       onClick:function(){
-        if(item.locked) return;
-        S.view=item.v;render();
+        if(item.locked){
+          // Tapping a locked tab takes them back to Before Week 1
+          // so they understand what needs to be done first
+          S.view="beforeWeek1";persist();render();return;
+        }
+        S.view=item.v;persist();render();
       }
     },[
       div("bn-icon",item.locked?"🔒":item.icon),
@@ -1413,57 +1436,128 @@ function buildToday(){
    WEEKS
 ========================================== */
 function buildWeeks(){
+  var complete=bw1Done();
   var totalTasks=0,totalDone=0;
   for(var w=1;w<=12;w++){for(var d=0;d<7;d++){var t=getDayTasks(w,d);totalTasks+=t.length;totalDone+=t.filter(function(t){return S.checked[t.id]==="done";}).length;}}
-  var ovPct=totalTasks>0?Math.round((totalDone/totalTasks)*100):0;
+  var ovPct=complete&&totalTasks>0?Math.round((totalDone/totalTasks)*100):0;
+
+  // Before Week 1 card - always shown at top
+  var bw1Tasks=getBW1();
+  var bw1Done_count=bw1Tasks.filter(function(t){return S.checked[t.id]==="done";}).length;
+  var bw1Pct=Math.round((bw1Done_count/bw1Tasks.length)*100);
+  var bw1Sc={bg:"#F1EFE8",text:"#444441",dot:complete?"#3D6B3D":"#EF9F27"};
+  var bw1Card=div("week-card",[
+    div("wc-left",[
+      el("div",{class:"wc-title"},"Before Week 1"),
+      el("div",{class:"wc-theme"},complete?"Preparation complete":"Prepare before you execute"),
+      div("wc-prog",[
+        div("wc-bar",[el("div",{class:"wc-fill",style:{width:bw1Pct+"%",background:bw1Sc.dot}},null)]),
+        el("div",{class:"wc-pct"},bw1Pct+"%")
+      ])
+    ]),
+    el("div",{class:"wc-badge",style:{background:complete?"#DDE8DD":"#FAEEDA",color:complete?"#3D6B3D":"#633806"}},complete?"Done":"In progress"),
+    el("div",{class:"wc-arrow"},"›")
+  ]);
+  bw1Card.addEventListener("click",function(){
+    S.view="beforeWeek1";persist();render();
+  });
+
+  // Week 1-12 cards
   var cards=[];
   for(var ww=1;ww<=12;ww++){(function(weekNum){
-    var pct=getWeekPct(weekNum),wm=weekMeta(weekNum),sc=getSC(wm.state);
+    var pct=complete?getWeekPct(weekNum):0;
+    var wm=weekMeta(weekNum),sc=getSC(wm.state);
     var card=div("week-card",[
-      div("wc-left",[el("div",{class:"wc-title"},wm.label),el("div",{class:"wc-theme"},wm.theme),div("wc-prog",[div("wc-bar",[el("div",{class:"wc-fill",style:{width:pct+"%",background:sc.dot}},null)]),el("div",{class:"wc-pct"},pct>0?pct+"%":"")])]),
+      div("wc-left",[
+        el("div",{class:"wc-title",style:complete?{}:{color:"var(--ink-l)"}},wm.label),
+        el("div",{class:"wc-theme"},wm.theme),
+        div("wc-prog",[
+          div("wc-bar",[el("div",{class:"wc-fill",style:{width:pct+"%",background:sc.dot}},null)]),
+          el("div",{class:"wc-pct"},complete&&pct>0?pct+"%":complete?"":"Preview")
+        ])
+      ]),
       el("div",{class:"wc-badge",style:{background:sc.bg,color:sc.text}},wm.score),
-      el("div",{class:"wc-arrow"},"›")
+      el("div",{class:"wc-arrow",style:complete?{}:{color:"#ddd"}},"›")
     ]);
+    card.style.opacity=complete?"1":"0.65";
     card.addEventListener("click",function(){
-      if(!bw1Done()) return; // locked during Before Week 1
       S.selWeekIdx=weekNum;S.selDayIdx=0;S.weekTab="days";S.view="weekDetail";persist();render();
     });
     cards.push(card);
   })(ww);}
-  return div("",[
-    el("div",{class:"hdr"},[el("div",{class:"hdr-title"},"All Weeks"),el("div",{class:"hdr-sub"},"Tap a week to open daily tasks")]),
-    div("spacer",null),
-    div("overall-card",[el("div",{class:"overall-pct"},ovPct+"%"),el("div",{class:"overall-sub"},totalDone+" of "+totalTasks+" tasks complete"),el("div",{class:"prog-track",style:{marginTop:"10px"}},[el("div",{class:"prog-fill",style:{width:ovPct+"%"}},null)])]),
-    div("card-wrap",cards),bottomNav()
-  ]);
+
+  var children=[
+    el("div",{class:"hdr"},[
+      el("div",{class:"hdr-title"},"All Weeks"),
+      el("div",{class:"hdr-sub"},complete?"Tap a week to open daily tasks":"Complete Before Week 1 to begin scoring")
+    ]),
+    div("spacer",null)
+  ];
+
+  if(complete){
+    children.push(div("overall-card",[
+      el("div",{class:"overall-pct"},ovPct+"%"),
+      el("div",{class:"overall-sub"},totalDone+" of "+totalTasks+" tasks complete"),
+      el("div",{class:"prog-track",style:{marginTop:"10px"}},[el("div",{class:"prog-fill",style:{width:ovPct+"%"}},null)])
+    ]));
+  }
+
+  children.push(div("card-wrap",[bw1Card].concat(cards)));
+  children.push(bottomNav());
+  return div("",children);
 }
 
 function buildWeekDetail(){
   var weekNum=S.selWeekIdx,wm=weekMeta(weekNum),curState=S.wstate[weekNum]||wm.state,curScore=S.wscore[weekNum]||"";
   var sc=getSC(curState),pct=getWeekPct(weekNum);
+  var readOnly=!bw1Done(); // preview mode until Before Week 1 complete
+
   var header=el("div",{style:{background:sc.bg,padding:"16px 14px"}},[
-    el("div",{style:{fontFamily:"'Lora',serif",fontSize:"20px",fontWeight:"500",color:sc.text}},wm.label),
+    el("div",{style:{fontFamily:"'Lora',serif",fontSize:"20px",fontWeight:"500",color:sc.text}},wm.label+(readOnly?" — Preview":"")),
     el("div",{style:{fontSize:"12px",color:sc.text,opacity:".8",marginTop:"3px",fontStyle:"italic"}},wm.theme),
-    div("wc-prog",[div("wc-bar",[el("div",{class:"wc-fill",style:{width:pct+"%",background:sc.dot}},null)]),el("div",{class:"wc-pct",style:{color:sc.text}},pct+"% complete")])
+    div("wc-prog",[div("wc-bar",[el("div",{class:"wc-fill",style:{width:pct+"%",background:sc.dot}},null)]),el("div",{class:"wc-pct",style:{color:sc.text}},readOnly?"Complete Before Week 1 to begin":pct+"% complete")])
   ]);
-  var tabs=div("tab-row",["days","state"].map(function(t){
+
+  // Read-only banner
+  var previewBanner=readOnly?div("bw1-locked-notice",{style:{margin:"10px 14px"}},[
+    el("span",{style:{fontSize:"16px",flexShrink:"0",marginTop:"1px"}},"👁"),
+    div("bw1-locked-text",[
+      el("span",{style:{fontWeight:"600",display:"block",marginBottom:"2px"}},"Preview mode"),
+      document.createTextNode("You can read your plan but cannot check, skip, edit, or add tasks until Before Week 1 is complete. "),
+      el("span",{style:{color:"var(--terra)",cursor:"pointer",textDecoration:"underline"},onClick:function(){S.view="beforeWeek1";persist();render();}},"Go to Before Week 1 →")
+    ])
+  ]):null;
+
+  // Only show Days tab in preview (no Week State until live)
+  var tabs=readOnly?null:div("tab-row",["days","state"].map(function(t){
     return el("button",{class:"tab-btn"+(S.weekTab===t?" active":""),onClick:function(){S.weekTab=t;persist();render();}},t==="days"?"Daily Tasks":"Week State");
   }));
+
   var content;
-  if(S.weekTab==="days"){
+  if(readOnly||S.weekTab==="days"){
     var dayBtns=div("day-strip",DAYS_SHORT.map(function(d,di){
-      var p=getDayPct(weekNum,di),active=S.selDayIdx===di,isDone=p===100;
+      var p=readOnly?0:getDayPct(weekNum,di),active=S.selDayIdx===di,isDone=!readOnly&&p===100;
       return el("div",{class:"day-pill"+(active?" today":"")+(isDone&&!active?" done":""),onClick:function(){S.selDayIdx=di;persist();render();}},[el("div",{class:"dp-name"},d),div("dp-dot",null)]);
     }));
     var dayTasks=getDayTasks(weekNum,S.selDayIdx);
-    var dayDone=dayTasks.filter(function(t){return S.checked[t.id]==="done";}).length;
-    var daySkipped=dayTasks.filter(function(t){return S.checked[t.id]==="skip";}).length;
-    var dayPct=dayTasks.length>0?Math.round((dayDone/dayTasks.length)*100):0;
-    content=div("",[dayBtns,
-      div("progress-strip",[el("div",{class:"prog-label"},DAYS_FULL[S.selDayIdx]),el("div",{class:"prog-track"},[el("div",{class:"prog-fill",style:{width:dayPct+"%"}},null)]),el("div",{class:"prog-pct"},dayDone+" done"+(daySkipped>0?"  .  "+daySkipped+" skipped":""))]),
-      div("card-wrap",dayTasks.map(function(task){return taskItem(task);})),
-      addTaskRow(weekNum,S.selDayIdx)
-    ]);
+    var dayDone=readOnly?0:dayTasks.filter(function(t){return S.checked[t.id]==="done";}).length;
+    var daySkipped=readOnly?0:dayTasks.filter(function(t){return S.checked[t.id]==="skip";}).length;
+    var dayPct=(!readOnly&&dayTasks.length>0)?Math.round((dayDone/dayTasks.length)*100):0;
+
+    var taskList=readOnly
+      ?div("card-wrap",dayTasks.map(function(task){return readOnlyTaskItem(task);}))
+      :div("card-wrap",dayTasks.map(function(task){return taskItem(task);}));
+
+    content=div("",[
+      dayBtns,
+      readOnly?null:div("progress-strip",[
+        el("div",{class:"prog-label"},DAYS_FULL[S.selDayIdx]),
+        el("div",{class:"prog-track"},[el("div",{class:"prog-fill",style:{width:dayPct+"%"}},null)]),
+        el("div",{class:"prog-pct"},dayDone+" done"+(daySkipped>0?" . "+daySkipped+" skipped":""))
+      ]),
+      taskList,
+      readOnly?null:addTaskRow(weekNum,S.selDayIdx)
+    ].filter(Boolean));
   } else {
     var stateInfo=[
       {s:"Recovery",desc:"MVD only. Rest is the work. No goal blocks, no pressure."},
@@ -1479,7 +1573,17 @@ function buildWeekDetail(){
       div("score-section",[el("div",{class:"score-label"},"Weekly score"),el("input",{class:"score-input",placeholder:"Target: "+wm.score,value:curScore,onInput:function(e){S.wscore[weekNum]=e.target.value;persist();}},null)])
     ]);
   }
-  var wrap=div("",[btn("back-btn","← All weeks",function(){S.view="weeks";persist();render();}),header,tabs,content,bottomNav()]);
+
+  var children=[
+    btn("back-btn","← All weeks",function(){S.view="weeks";persist();render();}),
+    header
+  ];
+  if(previewBanner) children.push(previewBanner);
+  if(tabs) children.push(tabs);
+  children.push(content);
+  children.push(bottomNav());
+
+  var wrap=div("",children);
   if(S.editModal) wrap.appendChild(buildEditModal());
   return wrap;
 }
@@ -1824,8 +1928,8 @@ function buildView(){
     wrap.appendChild(buildBeforeWeek1());return wrap;
   }
 
-  // If Before Week 1 not done, redirect Today to Before Week 1
-  if(!bw1Complete&&(S.view==="today"||S.view==="weeks"||S.view==="weekDetail")){
+  // Only Today stays locked behind Before Week 1
+  if(!bw1Complete&&S.view==="today"){
     wrap.appendChild(buildBeforeWeek1());return wrap;
   }
 
