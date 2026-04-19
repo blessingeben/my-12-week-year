@@ -299,6 +299,38 @@ input,textarea,select{font-family:inherit;outline:none}
 .mvd-body{font-size:12px;color:#534AB7;margin-top:2px;line-height:1.5}
 .empty-state{background:var(--sand-d);border:1px dashed var(--border-m);border-radius:12px;padding:22px 18px;text-align:center;color:var(--ink-l);font-style:italic;margin:8px 14px;font-size:14px;line-height:1.6}
 .sprint-badge{display:inline-flex;align-items:center;gap:5px;background:var(--gold-p);border:1px solid rgba(122,92,16,0.3);border-radius:20px;padding:4px 14px;font-size:12px;color:var(--gold);letter-spacing:.03em;margin:8px 14px 4px}
+
+/* ── ORIENTATION & BEFORE WEEK 1 ── */
+.orient-wrap{min-height:100vh;background:var(--sand);padding:28px 20px 120px;overflow-y:auto}
+.orient-banner{background:var(--ink);border-radius:14px;padding:24px 20px;margin-bottom:22px;position:relative;overflow:hidden}
+.orient-banner::before{content:'12';position:absolute;right:-10px;top:-10px;font-family:'Lora',serif;font-size:100px;font-style:italic;color:rgba(245,240,232,0.04);pointer-events:none;line-height:1}
+.orient-eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--terra-l);margin-bottom:8px;font-family:'Crimson Pro',serif}
+.orient-banner-title{font-family:'Lora',serif;font-size:22px;color:var(--sand);margin-bottom:8px}
+.orient-banner-body{font-size:14px;color:rgba(245,240,232,0.65);line-height:1.7;font-style:italic}
+.orient-section-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-l);margin:20px 0 10px}
+.orient-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:flex-start;gap:12px}
+.orient-card-icon{font-size:20px;flex-shrink:0;margin-top:1px}
+.orient-card-title{font-family:'Lora',serif;font-size:14px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.orient-card-body{font-size:13px;color:var(--ink-m);line-height:1.6}
+.orient-restriction{background:var(--skip-p);border:1px solid rgba(179,48,48,0.2);border-radius:10px;padding:11px 14px;margin-bottom:8px;display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--skip)}
+.orient-restriction-icon{font-size:16px;flex-shrink:0}
+.orient-unlock{background:var(--sage-p);border:1px solid rgba(61,107,61,0.25);border-radius:10px;padding:11px 14px;margin-bottom:8px;display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--sage)}
+.orient-foot{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid var(--border);padding:14px 20px 32px}
+.bw1-header{background:#fff;padding:14px 16px 11px;border-bottom:1px solid var(--border)}
+.bw1-title{font-family:'Lora',serif;font-size:19px;font-weight:500;color:var(--ink)}
+.bw1-sub{font-size:12px;color:var(--ink-l);margin-top:2px}
+.bw1-explainer{margin:10px 14px;background:var(--ink);border-radius:13px;padding:18px 16px}
+.bw1-explainer-eyebrow{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--terra-l);margin-bottom:6px;font-family:'Crimson Pro',serif}
+.bw1-explainer-title{font-family:'Lora',serif;font-size:17px;color:var(--sand);margin-bottom:8px}
+.bw1-explainer-body{font-size:13px;color:rgba(245,240,232,0.65);line-height:1.65}
+.bw1-locked-notice{margin:10px 14px;display:flex;align-items:flex-start;gap:10px;background:var(--skip-p);border:1px solid rgba(179,48,48,0.2);border-radius:10px;padding:11px 14px}
+.bw1-locked-text{font-size:13px;color:var(--skip);line-height:1.5}
+.bw1-progress-card{margin:10px 14px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.bw1-progress-label{font-size:12px;color:var(--ink-l);margin-bottom:8px}
+.bw1-progress-pct{font-family:'Lora',serif;font-size:28px;font-weight:500;color:var(--ink)}
+.unlock-banner{margin:10px 14px;background:var(--sage-p);border:1px solid rgba(61,107,61,0.3);border-radius:13px;padding:18px 16px;text-align:center}
+.unlock-banner-title{font-family:'Lora',serif;font-size:18px;color:var(--sage);margin-bottom:6px}
+.unlock-banner-body{font-size:13px;color:var(--sage);opacity:.85;line-height:1.55;margin-bottom:14px}
 </style>
 </head>
 <body>
@@ -797,7 +829,11 @@ var WIZ=["welcome","areas","vision","smart","tactics","routine","review"];
 function wizTo(step){S.wiz.step=step;persist();render();}
 function wizNext(){
   var cur=S.wiz.step;
-  if(cur===WIZ.length-1){S.setupDone=true;S.view="today";persist();render();return;}
+  if(cur===WIZ.length-1){
+    S.setupDone=true;
+    S.view="orientation";
+    persist();render();return;
+  }
   S.wiz.step++;persist();render();
 }
 function wizBack(){if(S.wiz.step>0){S.wiz.step--;persist();render();}}
@@ -1292,18 +1328,29 @@ function buildEditModal(){
    BOTTOM NAV
 ══════════════════════════════════════════ */
 function bottomNav(){
+  var bw1Complete=bw1Done();
   var items=[
-    {icon:"☀️",label:"Today",v:"today"},
-    {icon:"📅",label:"Weeks",v:"weeks"},
-    {icon:"✦",label:"Vision",v:"visionGoals"},
-    {icon:"📊",label:"Measures",v:"measures"},
-    {icon:"📖",label:"Reference",v:"reference"},
-    {icon:"🅿️",label:"Parking",v:"parking"}
+    {icon:"☀️",label:"Today",    v:"today",      locked:!bw1Complete},
+    {icon:"📅",label:"Weeks",    v:"weeks",      locked:!bw1Complete},
+    {icon:"✦", label:"Vision",   v:"visionGoals",locked:false},
+    {icon:"📊",label:"Measures", v:"measures",   locked:false},
+    {icon:"📖",label:"Reference",v:"reference",  locked:false},
+    {icon:"🅿️",label:"Parking",  v:"parking",    locked:false}
   ];
+  // Before Week 1 active state
+  var inBW1=S.view==="beforeWeek1"||(S.view==="today"&&!bw1Complete)||(S.view==="weeks"&&!bw1Complete);
   return div("bottom-nav",items.map(function(item){
     var active=S.view===item.v||(item.v==="weeks"&&S.view==="weekDetail");
-    return el("button",{class:"bn-btn",onClick:function(){S.view=item.v;render();}},[
-      div("bn-icon",item.icon),
+    if(item.locked) active=false;
+    return el("button",{
+      class:"bn-btn",
+      style:item.locked?{opacity:".35",cursor:"not-allowed"}:{},
+      onClick:function(){
+        if(item.locked) return;
+        S.view=item.v;render();
+      }
+    },[
+      div("bn-icon",item.locked?"🔒":item.icon),
       el("div",{class:"bn-label"+(active?" active":"")},item.label),
       div("bn-dot"+(active?" active":""),null)
     ]);
@@ -1534,11 +1581,213 @@ function buildParking(){
 }
 
 /* ══════════════════════════════════════════
+   BEFORE WEEK 1 DATA
+══════════════════════════════════════════ */
+var BW1=[
+  {id:"bw1_0",
+   label:"Clear and set up your workspace",
+   detail:"Pick one spot in your home where you will do your goal work every day. It does not have to be a dedicated office — a corner of a table is enough. Clear it completely right now. Place your planner, a pen, and anything you need within arm's reach. The rule: this surface is always clear when you are not working. Setup and teardown take zero time because nothing moves."},
+  {id:"bw1_1",
+   label:"Block your goal time in your calendar",
+   detail:"Open your calendar app and create a recurring time block for each of your goals — one block per goal, per day or per week depending on your chosen frequency. Label each block with the goal name. Set them for the same time every occurrence. You are not deciding when to work on Week 1 Day 1 — you decided right now. When the block appears on your calendar, you work. No deliberation required."},
+  {id:"bw1_2",
+   label:"Read your full Week 1 plan until nothing surprises you",
+   detail:"Go to Weeks and open Week 1. Read every single task for every day of the week. Do not skim. Read until you could describe Monday through Sunday from memory. The goal is zero surprises on Day 1. When you know what is coming, you do not have to decide — you just execute. This single step eliminates most of the friction that kills Week 1."},
+  {id:"bw1_3",
+   label:"Tell one person you are starting and set a check-in date",
+   detail:"Text or call one person — a friend, family member, or colleague — and tell them two things: what your main goal is for the next 12 weeks, and a specific date you will check in with them to share your progress. Do not be vague. Say the goal out loud and name the date. This creates a real social commitment. Research consistently shows that stated accountability with a specific date is one of the strongest predictors of follow-through."}
+];
+
+function bw1Done(){
+  return BW1.every(function(t){return S.checked[t.id]==="done";});
+}
+
+/* ══════════════════════════════════════════
+   ORIENTATION SCREEN
+══════════════════════════════════════════ */
+function buildOrientation(){
+  var name=S.wiz.routine&&S.wiz.routine.name;
+
+  var body=div("orient-wrap",null);
+
+  // Banner
+  body.appendChild(div("orient-banner",[
+    el("div",{class:"orient-eyebrow"},"Setup complete"),
+    el("div",{class:"orient-banner-title"},name?"Welcome, "+name+". Here is how this works.":"Your plan is built. Here is how this works."),
+    el("div",{class:"orient-banner-body"},"Read this once before you start. It covers everything you need to use the app confidently every day.")
+  ]));
+
+  // Before Week 1
+  el_section(body,"Before you start: Before Week 1");
+  body.appendChild(orientCard("📋","Before Week 1 — not Week 1","Your 12 weeks have not started yet. Before Week 1 is a preparation phase that sits outside your scored sprint. It has one job: remove every obstacle that would slow down Week 1 Day 1. Four tasks. No goal work. Just friction removal."));
+  body.appendChild(div("orient-restriction",[
+    el("span",{class:"orient-restriction-icon"},"🔒"),
+    el("div",null,"Today and your weekly scorecard are locked until Before Week 1 is complete. You can access Vision, Reference, and Parking at any time.")
+  ]));
+  body.appendChild(div("orient-unlock",[
+    el("span",{style:{fontSize:"16px",flexShrink:"0"}},"✓"),
+    el("div",null,"When all four Before Week 1 tasks are checked done, Today unlocks automatically and your 12-week sprint begins.")
+  ]));
+
+  // Daily use
+  el_section(body,"How to use this every day");
+  body.appendChild(orientCard("☀️","Open Today first thing","Set your energy level — Low, Medium, or High. This filters your task list automatically. On low energy days only your essential habits appear. Work through tasks top to bottom. Tap a task label to see full instructions."));
+  body.appendChild(orientCard("✓  ✕","Done vs skipped","Tap ✓ when you complete a task. Tap ✕ when you did not — that is honest accounting, not failure. Both matter. Your weekly score is tasks done divided by total tasks. Skipped tasks count against your score. This keeps the data honest."));
+  body.appendChild(orientCard("✎  🗑","Edit and delete","Tap the pencil to rename or rewrite any task. Tap the bin to remove it permanently. Deleted tasks do not affect your score at all — use delete for tasks that were never relevant to you, and skip for tasks you should have done but did not."));
+  body.appendChild(orientCard("➕","Add your own tasks","At the bottom of every day there is an Add a task field. Anything you add appears in your list and behaves exactly like a built-in task."));
+
+  // Weekly rhythm
+  el_section(body,"Your weekly rhythm");
+  body.appendChild(orientCard("📅","Every Sunday","Open Weeks, tap the current week, go to Week State, and score yourself honestly. Set your state for the coming week — Recovery, Stabilization, Maintenance, or Growth. Then read every task for next week so nothing surprises you on Monday."));
+  body.appendChild(orientCard("✦","Vision and Goals","Your 3-year vision and 12-week goal statements live in the Vision tab. Tap Edit at any time to go back into the setup and adjust anything. Your goals are not locked in."));
+  body.appendChild(orientCard("🅿️","Parking Lot","Anything you want to remember but not act on right now goes here. Future ideas, deferred decisions, things for next cycle. Get them out of your head and into the Parking Lot so they do not clutter your execution."));
+
+  // CTA
+  var ctaBtn=btn("wiz-next","Go to Before Week 1 →",function(){
+    S.view="beforeWeek1";persist();render();
+  });
+  ctaBtn.style.cssText="display:block;width:100%;margin-top:8px;";
+  body.appendChild(ctaBtn);
+
+  return div("",{style:{minHeight:"100vh",background:"var(--sand)"}},[body]);
+}
+
+function el_section(parent,label){
+  parent.appendChild(el("div",{class:"orient-section-label"},label));
+}
+
+function orientCard(icon,title,body){
+  return div("orient-card",[
+    el("div",{class:"orient-card-icon"},icon),
+    div("",[
+      el("div",{class:"orient-card-title"},title),
+      el("div",{class:"orient-card-body"},body)
+    ])
+  ]);
+}
+
+/* ══════════════════════════════════════════
+   BEFORE WEEK 1 SCREEN
+══════════════════════════════════════════ */
+function buildBeforeWeek1(){
+  var done=BW1.filter(function(t){return S.checked[t.id]==="done";}).length;
+  var total=BW1.length;
+  var pct=Math.round((done/total)*100);
+  var allDone=done===total;
+
+  // Auto-unlock: if all done, flip to today
+  if(allDone&&S.view==="beforeWeek1"){
+    S.view="today";S.todayWeek=1;persist();
+    // fall through to render today with unlock banner
+  }
+
+  var children=[];
+
+  // Header
+  children.push(div("bw1-header",[
+    div("bw1-title","Before Week 1"),
+    el("div",{class:"bw1-sub"},done+" of "+total+" complete")
+  ]));
+
+  // Unlock celebration
+  if(allDone){
+    children.push(div("unlock-banner",[
+      el("div",{style:{fontSize:"32px",marginBottom:"8px"}},"✓"),
+      el("div",{class:"unlock-banner-title"},"You are ready. Week 1 starts now."),
+      el("div",{class:"unlock-banner-body"},"Everything is unlocked. Open Today to begin your first day."),
+      btn("wiz-next","Open Today →",function(){S.view="today";S.todayWeek=1;persist();render();})
+    ]));
+    children.push(bottomNav());
+    return div("",children);
+  }
+
+  // Explainer
+  children.push(div("bw1-explainer",[
+    el("div",{class:"bw1-explainer-eyebrow"},"Before Week 1"),
+    el("div",{class:"bw1-explainer-title"},"Prepare. Don't execute."),
+    el("div",{class:"bw1-explainer-body"},"Your 12-week sprint has not started yet. These four tasks are about removing friction — not working toward your goals. Do not do any goal work here. Set up your space, block your time, read your plan, and tell someone you are starting. That is it. When all four are done, Week 1 unlocks automatically.")
+  ]));
+
+  // Locked notice
+  children.push(div("bw1-locked-notice",[
+    el("span",{style:{fontSize:"16px",flexShrink:"0",marginTop:"1px"}},"🔒"),
+    el("div",{class:"bw1-locked-text"},"Today and your scorecard are locked until all four tasks are complete. Vision, Reference, and Parking are available now.")
+  ]));
+
+  // Progress
+  children.push(div("bw1-progress-card",[
+    el("div",{class:"bw1-progress-label"},"Preparation progress"),
+    el("div",{class:"bw1-progress-pct"},pct+"%"),
+    el("div",{class:"prog-track",style:{marginTop:"10px"}},[
+      el("div",{class:"prog-fill",style:{width:pct+"%"}},null)
+    ])
+  ]));
+
+  // Tasks — use the same taskItem pattern but with bw1 styling
+  children.push(div("card-wrap",BW1.map(function(task){
+    return bw1TaskItem(task);
+  })));
+
+  children.push(bottomNav());
+  return div("",children);
+}
+
+function bw1TaskItem(task){
+  var id=task.id;
+  var isDone=S.checked[id]==="done";
+  var open=!!S.openTasks[id];
+  var bs=BLOCK_STYLE["Setup"];
+
+  var doneBtnEl=el("div",{class:"ts-btn done-btn"+(isDone?" active":""),onClick:function(e){
+    e.stopPropagation();
+    S.checked[id]=isDone?"":"done";
+    persist();
+    // Check if now all done
+    if(bw1Done()){S.view="beforeWeek1";} // re-render to show unlock
+    render();
+  }},isDone?[svgCheck()]:["✓"]);
+
+  var contentEl=div("task-content",[
+    el("div",{class:"task-label"+(isDone?" done":"")},task.label),
+    div("task-meta",[
+      el("span",{class:"block-chip",style:{background:bs.bg,color:bs.text}},"Prep")
+    ])
+  ]);
+  contentEl.addEventListener("click",function(){S.openTasks[id]=!S.openTasks[id];persist();render();});
+
+  var mainRow=div("task-main",[
+    div("task-status-btns",[doneBtnEl]),
+    contentEl,
+    el("span",{class:"task-chevron"+(open?" open":""),onClick:function(e){e.stopPropagation();S.openTasks[id]=!S.openTasks[id];persist();render();}},"›")
+  ]);
+
+  var item=div("task-item",[mainRow]);
+  if(open&&task.detail) item.appendChild(el("div",{class:"task-detail"},task.detail));
+  return item;
+}
+
+/* ══════════════════════════════════════════
    ROUTER
 ══════════════════════════════════════════ */
 function buildView(){
   var wrap=div("",null);
   if(!S.setupDone){wrap.appendChild(buildWizard());return wrap;}
+
+  // Gate Today and Weeks scorecard behind Before Week 1
+  var bw1Complete=bw1Done();
+
+  if(S.view==="orientation"){
+    wrap.appendChild(buildOrientation());return wrap;
+  }
+  if(S.view==="beforeWeek1"){
+    wrap.appendChild(buildBeforeWeek1());return wrap;
+  }
+
+  // If Before Week 1 not done, redirect Today to Before Week 1
+  if(!bw1Complete&&(S.view==="today"||S.view==="weeks"||S.view==="weekDetail")){
+    wrap.appendChild(buildBeforeWeek1());return wrap;
+  }
+
   if     (S.view==="today")       wrap.appendChild(buildToday());
   else if(S.view==="weeks")       wrap.appendChild(buildWeeks());
   else if(S.view==="weekDetail")  wrap.appendChild(buildWeekDetail());
