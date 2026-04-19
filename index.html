@@ -25,14 +25,14 @@ body{font-family:'Crimson Pro',Georgia,serif;background:var(--sand);color:var(--
 button{font-family:inherit;cursor:pointer;border:none;outline:none}
 input,textarea,select{font-family:inherit;outline:none}
 
-/* ── HEADER ── */
+/* -- HEADER -- */
 .hdr{background:#fff;padding:14px 16px 11px;border-bottom:1px solid var(--border)}
 .hdr-title{font-family:'Lora',Georgia,serif;font-size:19px;font-weight:500;color:var(--ink)}
 .hdr-sub{font-size:12px;color:var(--ink-l);margin-top:2px}
 .hdr-row{display:flex;align-items:center;justify-content:space-between}
 .state-badge{padding:3px 9px;border-radius:8px;font-size:11px;font-weight:600}
 
-/* ── BOTTOM NAV ── */
+/* -- BOTTOM NAV -- */
 .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid var(--border);display:flex;padding:8px 0 20px;z-index:100}
 .bn-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;padding:4px 0}
 .bn-icon{font-size:16px}
@@ -41,7 +41,7 @@ input,textarea,select{font-family:inherit;outline:none}
 .bn-dot{width:4px;height:4px;border-radius:50%;background:transparent;margin-top:1px}
 .bn-dot.active{background:var(--terra)}
 
-/* ── WIZARD SHELL ── */
+/* -- WIZARD SHELL -- */
 .wiz-wrap{min-height:100vh;display:flex;flex-direction:column;background:var(--sand)}
 .wiz-progress{height:3px;background:var(--sand-dd);flex-shrink:0}
 .wiz-prog-fill{height:100%;background:var(--terra);transition:width .35s}
@@ -52,12 +52,12 @@ input,textarea,select{font-family:inherit;outline:none}
 .wiz-next:disabled{background:var(--sand-dd);color:var(--ink-l);cursor:not-allowed}
 .wiz-back{padding:13px 18px;background:transparent;color:var(--ink-l);border:1px solid var(--border);border-radius:10px;font-family:'Crimson Pro',serif;font-size:15px;cursor:pointer}
 
-/* ── WIZ TYPOGRAPHY ── */
+/* -- WIZ TYPOGRAPHY -- */
 .wiz-eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--terra);margin-bottom:8px}
 .wiz-title{font-family:'Lora',serif;font-size:24px;font-weight:500;color:var(--ink);line-height:1.25;margin-bottom:10px}
 .wiz-desc{font-size:15px;color:var(--ink-m);font-style:italic;line-height:1.6;margin-bottom:24px}
 
-/* ── AREA PICKER ── */
+/* -- AREA PICKER -- */
 .area-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 .area-pick{padding:14px 12px;border-radius:12px;border:2px solid var(--border);background:#fff;cursor:pointer;transition:all .15s;text-align:left}
 .area-pick.selected{border-color:var(--terra);background:var(--terra-p)}
@@ -67,7 +67,7 @@ input,textarea,select{font-family:inherit;outline:none}
 .area-pick.selected .area-pick-name{color:var(--terra)}
 .pick-note{font-size:12px;color:var(--ink-l);font-style:italic;text-align:center;margin-top:4px}
 
-/* ── VISION STEP ── */
+/* -- VISION STEP -- */
 .vision-area-head{display:flex;align-items:center;gap:10px;margin-bottom:18px;padding:12px 14px;background:#fff;border-radius:12px;border:1px solid var(--border)}
 .vision-area-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
 .vision-area-name{font-family:'Lora',serif;font-size:15px;font-weight:500;color:var(--ink)}
@@ -81,7 +81,7 @@ input,textarea,select{font-family:inherit;outline:none}
 .prompt-input:focus{outline:none;border-color:var(--terra);background:#fff}
 .prompt-input::placeholder{color:var(--ink-l);font-style:italic}
 
-/* ── SMART GOAL BUILDER ── */
+/* -- SMART GOAL BUILDER -- */
 .smart-card{background:#fff;border:1px solid var(--border);border-radius:13px;margin-bottom:18px;overflow:hidden}
 .smart-card-head{padding:14px 16px;border-bottom:1px solid var(--border);background:rgba(245,240,232,0.5);display:flex;align-items:center;justify-content:space-between}
 .smart-card-title{font-family:'Lora',serif;font-size:15px;font-weight:500;color:var(--ink)}
@@ -106,7 +106,7 @@ input,textarea,select{font-family:inherit;outline:none}
 .smart-chip{padding:5px 12px;border-radius:20px;font-size:13px;border:1.5px solid var(--border);background:#fff;color:var(--ink-m);cursor:pointer;transition:all .15s}
 .smart-chip.selected{border-color:var(--terra);background:var(--terra-p);color:var(--terra);font-weight:600}
 
-/* ── TACTICS STEP ── */
+/* -- TACTICS STEP -- */
 .tactic-goal-section{margin-bottom:24px}
 .tactic-goal-label{font-family:'Lora',serif;font-size:15px;font-weight:500;color:var(--ink);margin-bottom:4px}
 .tactic-goal-sub{font-size:12px;color:var(--ink-l);font-style:italic;margin-bottom:12px}
@@ -127,7 +127,7 @@ input,textarea,select{font-family:inherit;outline:none}
 .add-tactic-btn{background:transparent;border:1px dashed var(--border-m);border-radius:7px;padding:6px 12px;font-family:'Crimson Pro',serif;font-size:13px;color:var(--ink-l);cursor:pointer;width:100%;text-align:left;margin-top:6px;transition:all .2s}
 .add-tactic-btn:hover{border-color:var(--terra);color:var(--terra)}
 
-/* ── ROUTINE STEP ── */
+/* -- ROUTINE STEP -- */
 .routine-section{margin-bottom:20px}
 .routine-section-title{font-family:'Lora',serif;font-size:15px;font-weight:500;color:var(--ink);margin-bottom:4px}
 .routine-section-sub{font-size:13px;color:var(--ink-l);font-style:italic;margin-bottom:12px;line-height:1.5}
@@ -142,7 +142,7 @@ input,textarea,select{font-family:inherit;outline:none}
 .toggle.on::after{transform:translateX(18px)}
 .routine-wrap{background:#fff;border-radius:12px;border:1px solid var(--border);overflow:hidden;margin-bottom:10px}
 
-/* ── REVIEW STEP ── */
+/* -- REVIEW STEP -- */
 .review-block{background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:12px}
 .review-block-title{font-family:'Lora',serif;font-size:14px;font-weight:500;color:var(--ink);margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--border)}
 .review-vision-text{font-size:14px;color:var(--ink-m);font-style:italic;line-height:1.55;margin-bottom:8px}
@@ -153,7 +153,7 @@ input,textarea,select{font-family:inherit;outline:none}
 .review-routine-item{font-size:13px;color:var(--ink-m);padding:4px 0;border-bottom:1px solid rgba(92,79,58,0.06)}
 .review-routine-item:last-child{border-bottom:none}
 
-/* ── ENERGY / DAY / PROGRESS ── */
+/* -- ENERGY / DAY / PROGRESS -- */
 .energy-bar{display:flex;gap:6px;padding:9px 14px;background:#fff;border-bottom:1px solid var(--border)}
 .e-btn{flex:1;padding:7px 4px;border-radius:10px;font-family:'Crimson Pro',serif;font-size:12px;font-weight:500;border:1.5px solid var(--border);background:var(--sand);color:var(--ink-l);text-align:center;transition:all .15s}
 .e-btn.active-low{background:#FCEBEB;border-color:#E24B4A;color:#791F1F;font-weight:600}
@@ -179,7 +179,7 @@ input,textarea,select{font-family:inherit;outline:none}
 .week-pill{padding:4px 10px;border-radius:8px;font-size:11px;font-family:'Crimson Pro',serif;background:var(--sand);color:var(--ink-l);border:1px solid var(--border);flex-shrink:0;transition:all .15s}
 .week-pill.active{background:var(--ink);color:#fff;border-color:var(--ink);font-weight:600}
 
-/* ── TASK ITEMS ── */
+/* -- TASK ITEMS -- */
 .task-item{background:#fff;border-bottom:1px solid rgba(92,79,58,0.07)}
 .task-item.skipped{background:#fdf8f8}
 .task-main{display:flex;align-items:flex-start;gap:8px;padding:10px 12px 10px 14px}
@@ -211,7 +211,7 @@ input,textarea,select{font-family:inherit;outline:none}
 .legend-row{display:flex;gap:12px;padding:6px 14px 8px;background:#fff;border-bottom:1px solid var(--border)}
 .legend-item{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--ink-l)}
 
-/* ── EDIT MODAL ── */
+/* -- EDIT MODAL -- */
 .modal-overlay{position:fixed;inset:0;background:rgba(44,36,25,0.5);z-index:300;display:flex;align-items:flex-end;max-width:480px;margin:0 auto}
 .modal-sheet{background:#fff;border-radius:20px 20px 0 0;padding:20px 18px 40px;width:100%}
 .modal-title{font-family:'Lora',serif;font-size:17px;font-weight:500;color:var(--ink);margin-bottom:14px}
@@ -225,7 +225,7 @@ input,textarea,select{font-family:inherit;outline:none}
 .modal-btn-save:hover{background:var(--ink)}
 .modal-btn-cancel{padding:12px 20px;background:var(--sand);color:var(--ink-l);border:1px solid var(--border);border-radius:9px;font-family:'Crimson Pro',serif;font-size:15px;cursor:pointer}
 
-/* ── WEEK CARDS ── */
+/* -- WEEK CARDS -- */
 .week-card{background:#fff;border-bottom:1px solid var(--border);cursor:pointer;padding:13px 14px;display:flex;align-items:center;justify-content:space-between}
 .wc-left{flex:1;min-width:0}
 .wc-title{font-family:'Lora',serif;font-size:14px;font-weight:500;color:var(--ink)}
@@ -248,20 +248,20 @@ input,textarea,select{font-family:inherit;outline:none}
 .score-label{font-size:10px;font-weight:700;color:var(--ink-l);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
 .score-input{width:100%;padding:10px 12px;border-radius:10px;border:1.5px solid var(--border);font-family:'Crimson Pro',serif;font-size:14px;background:var(--sand);color:var(--ink)}
 
-/* ── MEASURES ── */
+/* -- MEASURES -- */
 .m-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid rgba(92,79,58,0.07);background:#fff}
 .m-left{flex:1}
 .m-goal{font-size:13px;font-weight:500;color:var(--ink)}
 .m-track{font-size:11px;color:var(--ink-l);margin-top:1px}
 .m-target{font-size:14px;font-weight:700;color:var(--sage);font-family:'Lora',serif}
 
-/* ── VISION IN APP ── */
+/* -- VISION IN APP -- */
 .vision-anchor{background:var(--terra-p);border-left:3px solid var(--terra);border-radius:0 9px 9px 0;padding:9px 13px;margin-bottom:10px;font-style:italic;font-size:14px;color:var(--ink-m)}
 .vision-anchor-area{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--terra);margin-bottom:3px;font-style:normal;font-weight:700}
 .edit-plan-btn{display:block;width:calc(100% - 28px);margin:8px 14px;background:transparent;border:1px solid var(--border);border-radius:9px;padding:10px;font-family:'Crimson Pro',serif;font-size:14px;color:var(--ink-l);cursor:pointer;text-align:center;transition:all .2s}
 .edit-plan-btn:hover{border-color:var(--terra);color:var(--terra)}
 
-/* ── REFERENCE ── */
+/* -- REFERENCE -- */
 .ref-section{margin:8px 14px;background:#fff;border-radius:13px;overflow:hidden;border:1px solid var(--border)}
 .ref-head{padding:13px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer}
 .ref-title{font-family:'Lora',serif;font-size:13px;font-weight:500;color:var(--ink)}
@@ -274,7 +274,7 @@ input,textarea,select{font-family:inherit;outline:none}
 .method-tag{display:inline-block;background:var(--gold-p);color:var(--gold);font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;margin-bottom:4px;letter-spacing:.03em;text-transform:uppercase}
 .tip-tag{display:inline-block;background:var(--sage-p);color:var(--sage);font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;margin-bottom:4px;letter-spacing:.03em;text-transform:uppercase}
 
-/* ── PARKING ── */
+/* -- PARKING -- */
 .p-item{padding:12px 14px;border-bottom:1px solid rgba(92,79,58,0.07);background:#fff;display:flex;align-items:flex-start;gap:8px}
 .p-tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:10px;font-weight:600;background:var(--gold-p);color:var(--gold);margin-bottom:5px}
 .p-text{font-size:13px;color:var(--ink);line-height:1.55;flex:1}
@@ -286,7 +286,7 @@ input,textarea,select{font-family:inherit;outline:none}
 .add-parking-text:focus{outline:none;border-color:var(--terra)}
 .add-parking-btn{padding:8px 14px;background:var(--terra);color:#fff;border-radius:8px;font-family:'Crimson Pro',serif;font-size:13px;font-weight:600;white-space:nowrap}
 
-/* ── MISC ── */
+/* -- MISC -- */
 .back-btn{display:flex;align-items:center;gap:6px;padding:12px 14px 8px;color:var(--ink-l);font-size:14px;background:none;border:none;cursor:pointer}
 .spacer{height:8px}
 .card-wrap{margin:8px 14px;background:#fff;border-radius:13px;overflow:hidden;border:1px solid var(--border)}
@@ -300,7 +300,7 @@ input,textarea,select{font-family:inherit;outline:none}
 .empty-state{background:var(--sand-d);border:1px dashed var(--border-m);border-radius:12px;padding:22px 18px;text-align:center;color:var(--ink-l);font-style:italic;margin:8px 14px;font-size:14px;line-height:1.6}
 .sprint-badge{display:inline-flex;align-items:center;gap:5px;background:var(--gold-p);border:1px solid rgba(122,92,16,0.3);border-radius:20px;padding:4px 14px;font-size:12px;color:var(--gold);letter-spacing:.03em;margin:8px 14px 4px}
 
-/* ── ORIENTATION & BEFORE WEEK 1 ── */
+/* -- ORIENTATION & BEFORE WEEK 1 -- */
 .orient-wrap{min-height:100vh;background:var(--sand);padding:28px 20px 120px;overflow-y:auto}
 .orient-banner{background:var(--ink);border-radius:14px;padding:24px 20px;margin-bottom:22px;position:relative;overflow:hidden}
 .orient-banner::before{content:'12';position:absolute;right:-10px;top:-10px;font-family:'Lora',serif;font-size:100px;font-style:italic;color:rgba(245,240,232,0.04);pointer-events:none;line-height:1}
@@ -336,9 +336,9 @@ input,textarea,select{font-family:inherit;outline:none}
 <body>
 <div id="app"></div>
 <script>
-/* ══════════════════════════════════════════
+/* ==========================================
    LIFE AREAS DATA
-══════════════════════════════════════════ */
+========================================== */
 var LIFE_AREAS=[
   {id:"career",icon:"💼",name:"Career & Business",desc:"Work, professional growth, business building",color:"#F0E0CC",
    prompts:[
@@ -361,7 +361,7 @@ var LIFE_AREAS=[
    ]},
   {id:"finances",icon:"📈",name:"Finances",desc:"Money, savings, debt, financial freedom",color:"#F5ECC0",
    prompts:[
-     {s:"My financial life feels…",ph:"secure, expansive, intentional — describe the feeling…"},
+     {s:"My financial life feels…",ph:"secure, expansive, intentional -- describe the feeling…"},
      {s:"Three years from now, money allows me to…",ph:"what does financial freedom look like for you…"},
      {s:"I have eliminated the financial stress of…",ph:"debt, uncertainty, living paycheck to paycheck…"}
    ],
@@ -380,7 +380,7 @@ var LIFE_AREAS=[
    ]},
   {id:"health",icon:"🏃",name:"Health & Body",desc:"Movement, sleep, nutrition, energy",color:"#FCEBEB",
    prompts:[
-     {s:"My body feels…",ph:"strong, rested, capable — describe the physical feeling…"},
+     {s:"My body feels…",ph:"strong, rested, capable -- describe the physical feeling…"},
      {s:"Three years from now, my health looks like…",ph:"describe your energy, habits, physical capacity…"},
      {s:"I have built the habit of…",ph:"movement, sleep, nutrition, rest…"}
    ],
@@ -399,7 +399,7 @@ var LIFE_AREAS=[
    ]},
   {id:"relationships",icon:"❤️",name:"Relationships & Family",desc:"Partnership, family, friendships, connection",color:"#FBEAF0",
    prompts:[
-     {s:"My closest relationships feel…",ph:"deep, present, nourishing — describe the quality…"},
+     {s:"My closest relationships feel…",ph:"deep, present, nourishing -- describe the quality…"},
      {s:"Three years from now, my relationships look like…",ph:"describe the connection and presence you have with people…"},
      {s:"I show up for the people I love by…",ph:"how do you want to be remembered as a friend, partner, family member…"}
    ],
@@ -408,7 +408,7 @@ var LIFE_AREAS=[
    smartMeasure:"How will you know things have genuinely changed after 12 weeks?",
    smartMeasurePh:"e.g. Weekly calls with mom for 10 of 12 weeks, 12 date nights completed…",
    tactics:[
-     {t:"Have one real conversation with someone I love — not logistical, just present",freq:"weekly"},
+     {t:"Have one real conversation with someone I love -- not logistical, just present",freq:"weekly"},
      {t:"Send a message to a friend I have been meaning to reach",freq:"weekly"},
      {t:"Put my phone away during meals with people I care about",freq:"daily"},
      {t:"Ask one person how they are really doing and listen fully",freq:"weekly"},
@@ -418,7 +418,7 @@ var LIFE_AREAS=[
    ]},
   {id:"creative",icon:"🎨",name:"Creative Pursuits",desc:"Art, writing, music, making, expression",color:"#EEEDFE",
    prompts:[
-     {s:"When I am creating, I feel…",ph:"alive, free, focused — describe what making gives you…"},
+     {s:"When I am creating, I feel…",ph:"alive, free, focused -- describe what making gives you…"},
      {s:"Three years from now, my creative life looks like…",ph:"what are you making, sharing, building…"},
      {s:"The creative work I am most called to do is…",ph:"the thing you keep coming back to even when life gets busy…"}
    ],
@@ -427,7 +427,7 @@ var LIFE_AREAS=[
    smartMeasure:"What does done look like? How will you know you got there?",
    smartMeasurePh:"e.g. 3 complete songs recorded, 50 pages written, 12 pieces posted publicly…",
    tactics:[
-     {t:"Spend at least 20 minutes making something — no judgment, just make",freq:"daily"},
+     {t:"Spend at least 20 minutes making something -- no judgment, just make",freq:"daily"},
      {t:"Show up to my creative practice before I feel ready or inspired",freq:"daily"},
      {t:"Work on my main creative project for one focused block",freq:"weekly"},
      {t:"Share something I made with at least one person",freq:"weekly"},
@@ -490,11 +490,11 @@ var LIFE_AREAS=[
      {t:"Introduce two people who should know each other",freq:"weekly"},
      {t:"Attend one community event or gathering",freq:"weekly"},
      {t:"Reach out to someone who might need support right now",freq:"weekly"},
-     {t:"Contribute something — time, skill, or resource — to a cause I care about",freq:"weekly"}
+     {t:"Contribute something -- time, skill, or resource -- to a cause I care about",freq:"weekly"}
    ]},
   {id:"home",icon:"🏡",name:"Home & Environment",desc:"Space, organization, sanctuary, daily environment",color:"#F1EFE8",
    prompts:[
-     {s:"My home feels…",ph:"calm, clear, welcoming — describe the feeling of your space…"},
+     {s:"My home feels…",ph:"calm, clear, welcoming -- describe the feeling of your space…"},
      {s:"Three years from now, my living space looks like…",ph:"describe the environment you want to live in…"},
      {s:"My home supports my life because…",ph:"how does your space help you be who you want to be…"}
    ],
@@ -513,7 +513,7 @@ var LIFE_AREAS=[
    ]},
   {id:"learning",icon:"📚",name:"Learning & Education",desc:"Skills, knowledge, courses, intellectual growth",color:"#E6F1FB",
    prompts:[
-     {s:"The skill or knowledge I most want to build is…",ph:"specific, honest — what do you actually want to learn…"},
+     {s:"The skill or knowledge I most want to build is…",ph:"specific, honest -- what do you actually want to learn…"},
      {s:"Three years from now, I have learned how to…",ph:"describe what you can do or know that you cannot today…"},
      {s:"Learning this matters to me because…",ph:"connect it to something real in your life or work…"}
    ],
@@ -528,7 +528,7 @@ var LIFE_AREAS=[
      {t:"Teach or explain something I learned to someone else",freq:"weekly"},
      {t:"Finish one chapter, module, or lesson before starting something new",freq:"weekly"},
      {t:"Review my notes from the week and identify what stuck",freq:"weekly"},
-     {t:"Practice the skill I am building — not just consume content about it",freq:"daily"}
+     {t:"Practice the skill I am building -- not just consume content about it",freq:"daily"}
    ]}
 ];
 
@@ -545,35 +545,35 @@ var BLOCK_STYLE={
   Rest:{bg:"#F1EFE8",text:"#444441"},Custom:{bg:"#F5ECC0",text:"#7A5C10"},
   Setup:{bg:"#F1EFE8",text:"#444441"}
 };
-var WEEK_THEMES=["Start the engine — routines first","Build the daily rhythm","First upgrade: add one project block","First traction: one action per goal","Deepen the practice","Close the first half: review and reset","Back half begins: push outputs","Build momentum","Push through resistance","Launch","Document the impact","Complete and plan cycle 2"];
+var WEEK_THEMES=["Start the engine -- routines first","Build the daily rhythm","First upgrade: add one project block","First traction: one action per goal","Deepen the practice","Close the first half: review and reset","Back half begins: push outputs","Build momentum","Push through resistance","Launch","Document the impact","Complete and plan cycle 2"];
 var DAYS_SHORT=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
 var DAYS_FULL=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
 
 var REFERENCE=[
   {title:"The 12 Week Year: core principles",tag:"method",items:[
-    {title:"Why 12 weeks instead of 12 months",body:"A full year creates a false sense of time — there is always later. A 12-week sprint creates urgency without panic. Every week matters because you can see the end from the beginning."},
+    {title:"Why 12 weeks instead of 12 months",body:"A full year creates a false sense of time -- there is always later. A 12-week sprint creates urgency without panic. Every week matters because you can see the end from the beginning."},
     {title:"Lead measures vs lag measures",body:"Lag measures are outcomes: revenue, weight lost, followers. You cannot control them directly. Lead measures are actions: hours worked, workouts done, pages written. Track your lead measures every week and the lag measures follow."},
     {title:"The weekly scorecard",body:"Each week, score yourself honestly: tasks done divided by total tasks remaining (skipped count against you, deleted ones do not). Target starts at 60% in Week 1 and rises to 80% by Week 12. This is data, not judgment."},
     {title:"System states",body:"Recovery: rest is the work, do your minimum viable day only. Stabilization: routines plus one project action per day. Maintenance: full routines plus 2-3 goal blocks per week. Growth: full execution, daily goal blocks, protect high energy for deep work."},
-    {title:"Done vs skipped vs deleted",body:"Done means you completed it. Skipped means you did not — it counts honestly against your score. Deleted means the task was never relevant to you and is removed from your denominator entirely. Be honest about the difference."}
+    {title:"Done vs skipped vs deleted",body:"Done means you completed it. Skipped means you did not -- it counts honestly against your score. Deleted means the task was never relevant to you and is removed from your denominator entirely. Be honest about the difference."}
   ]},
   {title:"Making your tactics actually work",tag:"tip",items:[
     {title:"Specificity is everything",body:"Vague tactics fail. Not 'exercise more' but 'move for 20 minutes before dinner, 4 days this week.' The more specific the commitment, the more honest your scoring becomes and the less decision fatigue you face."},
-    {title:"Attach new habits to existing ones",body:"Do not create new time slots for new habits. Stack them onto things you already do. Morning coffee becomes morning coffee plus 5 minutes of reflection. The existing habit is the anchor — the new habit attaches to it."},
+    {title:"Attach new habits to existing ones",body:"Do not create new time slots for new habits. Stack them onto things you already do. Morning coffee becomes morning coffee plus 5 minutes of reflection. The existing habit is the anchor -- the new habit attaches to it."},
     {title:"The two-minute rule for starting",body:"If you are struggling to start, commit to just two minutes. Open the notebook. Put on the shoes. Sit at the desk. Starting is the hardest part. Two minutes almost always becomes twenty."},
     {title:"Weekly review is non-negotiable",body:"Skip your weekly review and the whole system drifts. Score last week honestly, set your state for the coming week, and read next week's tasks so nothing surprises you. Takes 20 minutes. Worth every one of them."}
   ]},
   {title:"When things go wrong",tag:"tip",items:[
-    {title:"Missed several days in a row",body:"Do not try to catch up. Lower your state — switch to Recovery or Stabilization. Do your minimum viable day today: wake without your phone, drink water, check your calendar, write one task, do your morning reflection. One completed MVD resets the momentum."},
+    {title:"Missed several days in a row",body:"Do not try to catch up. Lower your state -- switch to Recovery or Stabilization. Do your minimum viable day today: wake without your phone, drink water, check your calendar, write one task, do your morning reflection. One completed MVD resets the momentum."},
     {title:"Score consistently below 60%",body:"Your plan is too full. Delete the tasks that were never really yours. Reduce tactics to one per goal. The 12 Week Year works on honest commitment, not on doing everything."},
     {title:"A goal no longer feels right",body:"Put it in the Parking Lot and remove it from active goals. A goal you do not believe in will quietly sabotage your execution on the goals you do. Better to run two real goals than four performed ones."},
-    {title:"You feel stuck before starting",body:"Do not wait for motivation. Open the app, read the first task, do only that one thing. Motivation follows action — it does not precede it."}
+    {title:"You feel stuck before starting",body:"Do not wait for motivation. Open the app, read the first task, do only that one thing. Motivation follows action -- it does not precede it."}
   ]}
 ];
 
-/* ══════════════════════════════════════════
+/* ==========================================
    APP STATE
-══════════════════════════════════════════ */
+========================================== */
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
 
 var S={
@@ -620,9 +620,9 @@ function render(){
   var a=document.getElementById("app");a.innerHTML="";a.appendChild(buildView());
 }
 
-/* ══════════════════════════════════════════
+/* ==========================================
    DOM HELPERS
-══════════════════════════════════════════ */
+========================================== */
 function el(tag,attrs,children){
   var e=document.createElement(tag);
   if(attrs) Object.keys(attrs).forEach(function(k){
@@ -670,24 +670,24 @@ function svgX(){
   svg.appendChild(p);return svg;
 }
 
-/* ══════════════════════════════════════════
+/* ==========================================
    SMART GOAL STATEMENT BUILDER
-══════════════════════════════════════════ */
+========================================== */
 function buildGoalStatement(g){
   if(!g||!g.what||!g.what.trim()) return "";
   var freq=g.freq||"every week";
-  var measure=g.measure?(" — success means: "+g.measure):"";
+  var measure=g.measure?(" -- success means: "+g.measure):"";
   return "Over the next 12 weeks, I will "+g.what.trim().replace(/^[A-Z]/,function(c){return c.toLowerCase()})+measure+".";
 }
 
-/* ══════════════════════════════════════════
+/* ==========================================
    TACTIC FILTERING BY FREQUENCY
   freq options: daily | weekly | 3x/week
   user's chosen freq: "daily" | "few" | "once"
   daily → show daily + weekly
   few → show 3x/week + weekly  
   once → show weekly only
-══════════════════════════════════════════ */
+========================================== */
 function filteredTactics(areaId, userFreq){
   var area=getArea(areaId);
   var all=area.tactics||[];
@@ -698,9 +698,9 @@ function filteredTactics(areaId, userFreq){
   });
 }
 
-/* ══════════════════════════════════════════
+/* ==========================================
    DAILY TASK GENERATION
-══════════════════════════════════════════ */
+========================================== */
 function getDayTasks(weekNum,dayIdx){
   var base=generateDailyTasks(weekNum,dayIdx);
   var result=[];
@@ -721,24 +721,24 @@ function generateDailyTasks(weekNum,dayIdx){
   var isSun=dayIdx===6,isSat=dayIdx===5;
   var tasks=[];
 
-  // Morning block — driven by routine settings
+  // Morning block -- driven by routine settings
   tasks.push({block:"Routine",label:"Wake without reaching for your phone",detail:"Before touching your phone, sit up, take 3 slow breaths, plant your feet on the floor. Give yourself the first few minutes before the world gets in.",dur:"5 min"});
   tasks.push({block:"Routine",label:"Drink a full glass of water",detail:"Do this before anything else. Keep a glass on your nightstand so it requires no decision.",dur:"1 min"});
 
   if(r.faithEnabled){
-    tasks.push({block:"Soul",label:"Morning faith or spiritual practice",detail:"Spend 5-10 minutes in prayer, meditation, scripture, or quiet reflection. Attach it to something you already do — right after water, right before writing.",dur:"5-10 min"});
+    tasks.push({block:"Soul",label:"Morning faith or spiritual practice",detail:"Spend 5-10 minutes in prayer, meditation, scripture, or quiet reflection. Attach it to something you already do -- right after water, right before writing.",dur:"5-10 min"});
   }
 
   if(r.morningReflection){
-    tasks.push({block:"Mind",label:"Morning reflection — write it out",detail:"Spend 10-25 minutes writing stream of consciousness before the day starts. No editing, no rereading. Just clear your head onto the page. This is your most important daily habit.",dur:"10-25 min"});
+    tasks.push({block:"Mind",label:"Morning reflection -- write it out",detail:"Spend 10-25 minutes writing stream of consciousness before the day starts. No editing, no rereading. Just clear your head onto the page. This is your most important daily habit.",dur:"10-25 min"});
   }
 
   if(r.dailyPlanning){
-    tasks.push({block:"Planning",label:"Check your calendar",detail:"Open your calendar. Read what is scheduled today. Note any commitments that affect your available time. Close it after 5 minutes — you are not processing, just orienting.",dur:"5 min"});
+    tasks.push({block:"Planning",label:"Check your calendar",detail:"Open your calendar. Read what is scheduled today. Note any commitments that affect your available time. Close it after 5 minutes -- you are not processing, just orienting.",dur:"5 min"});
     tasks.push({block:"Planning",label:"Write today's plan",detail:"In your planner or a notes app, write 3-5 tasks. Next to each one, write how long you are committing to it. Commit to the time, not to finishing. This is the difference between a wish list and a plan.",dur:"5-10 min"});
   }
 
-  // Goal blocks — rotated by day
+  // Goal blocks -- rotated by day
   var goals=(S.wiz.goals||[]).filter(function(g){return g.statement&&g.tactics;});
   if(goals.length){
     var dayGoals=[];
@@ -761,7 +761,7 @@ function generateDailyTasks(weekNum,dayIdx){
       var tacIdx=Math.floor((weekNum-1)/2)%allTactics.length;
       var tactic=allTactics[tacIdx];
 
-      // Frequency gating — daily tactics appear Mon-Fri, weekly on Mon only
+      // Frequency gating -- daily tactics appear Mon-Fri, weekly on Mon only
       var freq=g.freq||"few";
       var showToday=true;
       if(freq==="once"&&dayIdx!==0&&!isSun) showToday=false;
@@ -771,7 +771,7 @@ function generateDailyTasks(weekNum,dayIdx){
       tasks.push({
         block:"Goal",
         label:area.icon+" "+g.what+": "+tactic,
-        detail:"This supports your goal: \""+g.statement+"\" — Commit to the time you wrote in your planner. Start with 25 minutes of focused work. Progress over perfection every time.",
+        detail:"This supports your goal: \""+g.statement+"\" -- Commit to the time you wrote in your planner. Start with 25 minutes of focused work. Progress over perfection every time.",
         dur:freq==="daily"?"25-45 min":"30-60 min"
       });
     });
@@ -791,11 +791,11 @@ function generateDailyTasks(weekNum,dayIdx){
   }
 
   // Evening block
-  tasks.push({block:"Mind",label:"Brain sweep",detail:"Open a notes app or your journal. Dump everything still in your head — worries, tomorrow tasks, ideas, things you need to remember. Get it out of your mind and onto the page. Takes 3 minutes.",dur:"3 min"});
+  tasks.push({block:"Mind",label:"Brain sweep",detail:"Open a notes app or your journal. Dump everything still in your head -- worries, tomorrow tasks, ideas, things you need to remember. Get it out of your mind and onto the page. Takes 3 minutes.",dur:"3 min"});
   if(r.eveningReview){
     tasks.push({block:"Planning",label:"Quick daily reflection",detail:"Write two sentences: how today felt, and one intention for tomorrow. No more than that. The habit matters more than the length.",dur:"3 min"});
   }
-  tasks.push({block:"Routine",label:"Evening wind-down",detail:"Whatever your evening routine is — skincare, brushing teeth, getting ready for tomorrow — do it at the same time every night. Consistency signals to your brain that the day is closing.",dur:"15-20 min"});
+  tasks.push({block:"Routine",label:"Evening wind-down",detail:"Whatever your evening routine is -- skincare, brushing teeth, getting ready for tomorrow -- do it at the same time every night. Consistency signals to your brain that the day is closing.",dur:"15-20 min"});
   tasks.push({block:"Routine",label:"Screens off and phone away",detail:"Put your phone on the charger away from your bed. No social media, no email, no scrolling after this point. Protect your sleep.",dur:"Immediate"});
 
   return tasks;
@@ -821,9 +821,9 @@ function weekMeta(n){
   return{week:n,label:"Week "+n,theme:WEEK_THEMES[i],state:states[i],score:scores[i]};
 }
 
-/* ══════════════════════════════════════════
+/* ==========================================
    WIZARD
-══════════════════════════════════════════ */
+========================================== */
 var WIZ=["welcome","areas","vision","smart","tactics","routine","review"];
 
 function wizTo(step){S.wiz.step=step;persist();render();}
@@ -848,7 +848,7 @@ function buildWizard(){
   var showBack=S.wiz.step>0;
   var customFoot=false;
 
-  /* ── WELCOME ── */
+  /* -- WELCOME -- */
   if(step==="welcome"){
     body.appendChild(div("",[
       el("div",{class:"wiz-eyebrow"},"Welcome"),
@@ -862,7 +862,7 @@ function buildWizard(){
     ]));
     nextLabel="Build my plan →";
 
-  /* ── AREAS ── */
+  /* -- AREAS -- */
   } else if(step==="areas"){
     body.appendChild(el("div",{class:"wiz-eyebrow"},"Step 1 of 6"));
     body.appendChild(el("div",{class:"wiz-title"},"Choose your focus areas"));
@@ -887,7 +887,7 @@ function buildWizard(){
     body.appendChild(el("div",{class:"pick-note"},S.wiz.selAreas.length+" of 4 selected"));
     nextDisabled=S.wiz.selAreas.length<2;
 
-  /* ── VISION ── */
+  /* -- VISION -- */
   } else if(step==="vision"){
     customFoot=true;
     var aIdx=S.wiz.visionAreaIdx||0;
@@ -895,7 +895,7 @@ function buildWizard(){
     var area=getArea(areaId);
     var isLastArea=aIdx>=S.wiz.selAreas.length-1;
 
-    body.appendChild(el("div",{class:"wiz-eyebrow"},"Step 2 of 6 — Vision"));
+    body.appendChild(el("div",{class:"wiz-eyebrow"},"Step 2 of 6 -- Vision"));
     body.appendChild(el("div",{class:"wiz-title"},"Where are you headed?"));
     body.appendChild(el("div",{class:"wiz-desc"},"Complete each sentence honestly. 2-3 sentences is enough. Write what you actually want, not what sounds reasonable."));
 
@@ -946,7 +946,7 @@ function buildWizard(){
     var wrap=div("wiz-wrap",[progress,body,foot]);
     return wrap;
 
-  /* ── SMART GOALS ── */
+  /* -- SMART GOALS -- */
   } else if(step==="smart"){
     customFoot=true;
     var gIdx=S.wiz.smartGoalIdx||0;
@@ -955,7 +955,7 @@ function buildWizard(){
     var area2=getArea(goal?goal.areaId:"");
     var isLastGoal=gIdx>=goals.length-1;
 
-    body.appendChild(el("div",{class:"wiz-eyebrow"},"Step 3 of 6 — Goals ("+(gIdx+1)+" of "+goals.length+")"));
+    body.appendChild(el("div",{class:"wiz-eyebrow"},"Step 3 of 6 -- Goals ("+(gIdx+1)+" of "+goals.length+")"));
     body.appendChild(el("div",{class:"wiz-title"},"Build your "+area2.icon+" "+area2.name+" goal"));
 
     // Show their vision as context
@@ -978,7 +978,7 @@ function buildWizard(){
         // Q1: What
         div("smart-q",[
           el("div",{class:"smart-q-label"},area2.smartWhat||"What specifically do you want to achieve in 12 weeks?"),
-          el("div",{class:"smart-q-hint"},"Be specific — the more concrete, the better your plan will be"),
+          el("div",{class:"smart-q-hint"},"Be specific -- the more concrete, the better your plan will be"),
           el("input",{class:"smart-input",type:"text",id:"smart-what-"+gIdx,value:esc(goal?goal.what:""),
             placeholder:area2.smartWhatPh||"",
             onInput:function(e){
@@ -1043,7 +1043,7 @@ function buildWizard(){
     var wrap2=div("wiz-wrap",[progress,body,foot2]);
     return wrap2;
 
-  /* ── TACTICS ── */
+  /* -- TACTICS -- */
   } else if(step==="tactics"){
     customFoot=true;
     var tIdx=S.wiz.tacticGoalIdx||0;
@@ -1052,7 +1052,7 @@ function buildWizard(){
     var tArea=getArea(tGoal?tGoal.areaId:"");
     var isLastTGoal=tIdx>=tGoals.length-1;
 
-    body.appendChild(el("div",{class:"wiz-eyebrow"},"Step 4 of 6 — Tactics ("+(tIdx+1)+" of "+tGoals.length+")"));
+    body.appendChild(el("div",{class:"wiz-eyebrow"},"Step 4 of 6 -- Tactics ("+(tIdx+1)+" of "+tGoals.length+")"));
     body.appendChild(el("div",{class:"wiz-title"},"Choose your weekly actions"));
     body.appendChild(el("div",{class:"wiz-desc"},"Select the tactics you will commit to for this goal. These appear in your daily task list at the frequency you chose."));
 
@@ -1068,7 +1068,7 @@ function buildWizard(){
 
       // Template tactics
       if(tGoal.tactics&&tGoal.tactics.length){
-        body.appendChild(el("div",{style:{fontSize:"12px",fontWeight:"700",letterSpacing:".06em",textTransform:"uppercase",color:"var(--ink-l)",marginBottom:"10px"}},"Suggested tactics — tap to select:"));
+        body.appendChild(el("div",{style:{fontSize:"12px",fontWeight:"700",letterSpacing:".06em",textTransform:"uppercase",color:"var(--ink-l)",marginBottom:"10px"}},"Suggested tactics -- tap to select:"));
         tGoal.tactics.forEach(function(t){
           var opt=div("tactic-option"+(t.selected?" selected":""),[
             el("div",{class:"tactic-option-cb"},t.selected?"✓":""),
@@ -1111,14 +1111,14 @@ function buildWizard(){
     var wrap3=div("wiz-wrap",[progress,body,foot3]);
     return wrap3;
 
-  /* ── ROUTINE ── */
+  /* -- ROUTINE -- */
   } else if(step==="routine"){
     var r=S.wiz.routine;
-    body.appendChild(el("div",{class:"wiz-eyebrow"},"Step 5 of 6 — Daily Routine"));
+    body.appendChild(el("div",{class:"wiz-eyebrow"},"Step 5 of 6 -- Daily Routine"));
     body.appendChild(el("div",{class:"wiz-title"},"Build your daily structure"));
     body.appendChild(el("div",{class:"wiz-desc"},"These appear in your task list every day. Toggle off anything that does not fit your life right now."));
 
-    var nameInp=el("input",{class:"smart-input",type:"text",value:esc(r.name||""),placeholder:"Your first name (optional — personalizes the app)",onInput:function(e){r.name=e.target.value;persist();}},null);
+    var nameInp=el("input",{class:"smart-input",type:"text",value:esc(r.name||""),placeholder:"Your first name (optional -- personalizes the app)",onInput:function(e){r.name=e.target.value;persist();}},null);
     body.appendChild(div("",{style:{marginBottom:"20px"}},[el("div",{class:"smart-q-label"},"Your name"),nameInp]));
 
     var routineItems=[
@@ -1139,9 +1139,9 @@ function buildWizard(){
     })));
     nextLabel="Review my plan →";
 
-  /* ── REVIEW ── */
+  /* -- REVIEW -- */
   } else if(step==="review"){
-    body.appendChild(el("div",{class:"wiz-eyebrow"},"Step 6 of 6 — Review"));
+    body.appendChild(el("div",{class:"wiz-eyebrow"},"Step 6 of 6 -- Review"));
     body.appendChild(el("div",{class:"wiz-title"},(S.wiz.routine.name?"Almost there, "+S.wiz.routine.name+"!":"Almost there!")));
     body.appendChild(el("div",{class:"wiz-desc"},"Here is your 12-week plan. You can edit everything inside the app after you start."));
 
@@ -1267,9 +1267,9 @@ function updatePreview(gIdx){
   if(pEl) pEl.textContent=g.statement||"Your goal statement will appear here as you fill in the answers above.";
 }
 
-/* ══════════════════════════════════════════
+/* ==========================================
    TASK ITEM
-══════════════════════════════════════════ */
+========================================== */
 function taskItem(task){
   var id=task.id,status=S.checked[id]||"",isDone=status==="done",isSkip=status==="skip",open=!!S.openTasks[id];
   var bs=BLOCK_STYLE[task.block]||{bg:"#eee",text:"#666"};
@@ -1324,9 +1324,9 @@ function buildEditModal(){
   return overlay;
 }
 
-/* ══════════════════════════════════════════
+/* ==========================================
    BOTTOM NAV
-══════════════════════════════════════════ */
+========================================== */
 function bottomNav(){
   var bw1Complete=bw1Done();
   var items=[
@@ -1357,9 +1357,9 @@ function bottomNav(){
   }));
 }
 
-/* ══════════════════════════════════════════
+/* ==========================================
    TODAY
-══════════════════════════════════════════ */
+========================================== */
 function buildToday(){
   var today=new Date(),dayIdx=(today.getDay()+6)%7,weekNum=S.todayWeek;
   var wm=weekMeta(weekNum),sc=getSC(wm.state);
@@ -1389,7 +1389,7 @@ function buildToday(){
   var progStrip=div("progress-strip",[
     el("div",{class:"prog-label"},DAYS_FULL[dayIdx]),
     el("div",{class:"prog-track"},[el("div",{class:"prog-fill",style:{width:pct+"%"}},null)]),
-    el("div",{class:"prog-pct"},done+" done"+(skipped>0?" · "+skipped+" skipped":""))
+    el("div",{class:"prog-pct"},done+" done"+(skipped>0?"  .  "+skipped+" skipped":""))
   ]);
   var legend=div("legend-row",[
     div("legend-item",[el("span",{style:{color:"var(--sage)",fontWeight:"700",fontSize:"14px"}},"✓")," done"]),
@@ -1409,9 +1409,9 @@ function buildToday(){
   return div("",children);
 }
 
-/* ══════════════════════════════════════════
+/* ==========================================
    WEEKS
-══════════════════════════════════════════ */
+========================================== */
 function buildWeeks(){
   var totalTasks=0,totalDone=0;
   for(var w=1;w<=12;w++){for(var d=0;d<7;d++){var t=getDayTasks(w,d);totalTasks+=t.length;totalDone+=t.filter(function(t){return S.checked[t.id]==="done";}).length;}}
@@ -1460,7 +1460,7 @@ function buildWeekDetail(){
     var daySkipped=dayTasks.filter(function(t){return S.checked[t.id]==="skip";}).length;
     var dayPct=dayTasks.length>0?Math.round((dayDone/dayTasks.length)*100):0;
     content=div("",[dayBtns,
-      div("progress-strip",[el("div",{class:"prog-label"},DAYS_FULL[S.selDayIdx]),el("div",{class:"prog-track"},[el("div",{class:"prog-fill",style:{width:dayPct+"%"}},null)]),el("div",{class:"prog-pct"},dayDone+" done"+(daySkipped>0?" · "+daySkipped+" skipped":""))]),
+      div("progress-strip",[el("div",{class:"prog-label"},DAYS_FULL[S.selDayIdx]),el("div",{class:"prog-track"},[el("div",{class:"prog-fill",style:{width:dayPct+"%"}},null)]),el("div",{class:"prog-pct"},dayDone+" done"+(daySkipped>0?"  .  "+daySkipped+" skipped":""))]),
       div("card-wrap",dayTasks.map(function(task){return taskItem(task);})),
       addTaskRow(weekNum,S.selDayIdx)
     ]);
@@ -1484,9 +1484,9 @@ function buildWeekDetail(){
   return wrap;
 }
 
-/* ══════════════════════════════════════════
+/* ==========================================
    VISION & GOALS (in-app)
-══════════════════════════════════════════ */
+========================================== */
 function buildVisionGoals(){
   var tabRow=div("tab-row",[
     el("button",{class:"tab-btn"+(S.visionTab==="vision"?" active":""),onClick:function(){S.visionTab="vision";persist();render();}},"Vision"),
@@ -1500,7 +1500,7 @@ function buildVisionGoals(){
       area.prompts.forEach(function(_,pi){
         var val=S.wiz.vision[aid+"_"+pi];
         if(!val||!val.trim()) return;
-        items.push(div("vision-anchor",[el("div",{class:"vision-anchor-area"},area.icon+" "+area.name+" — "+area.prompts[pi].s),document.createTextNode(val)]));
+        items.push(div("vision-anchor",[el("div",{class:"vision-anchor-area"},area.icon+" "+area.name+" -- "+area.prompts[pi].s),document.createTextNode(val)]));
       });
     });
     content=div("",[div("spacer",null),items.length?div("",items):div("empty-state","Your vision is empty. Tap below to fill it in."),btn("edit-plan-btn","Edit your vision →",function(){S.setupDone=false;S.wiz.step=WIZ.indexOf("vision");S.wiz.visionAreaIdx=0;persist();render();})]);
@@ -1509,7 +1509,7 @@ function buildVisionGoals(){
       var area=getArea(g.areaId);
       var allTacs=[].concat((g.tactics||[]).filter(function(t){return t.selected;}).map(function(t){return t.text;}),(g.custom||[]).filter(function(t){return t.text;}).map(function(t){return t.text;}));
       return div("",{style:{background:"#fff",border:"1px solid var(--border)",borderRadius:"13px",margin:"8px 14px",overflow:"hidden"}},[
-        div("",{style:{padding:"12px 16px 0"}},[el("div",{style:{fontSize:"10px",letterSpacing:".1em",textTransform:"uppercase",color:"var(--terra)",fontWeight:"700",marginBottom:"4px"}},"Goal "+(i+1)+" · "+area.icon+" "+area.name)]),
+        div("",{style:{padding:"12px 16px 0"}},[el("div",{style:{fontSize:"10px",letterSpacing:".1em",textTransform:"uppercase",color:"var(--terra)",fontWeight:"700",marginBottom:"4px"}},"Goal "+(i+1)+"  .  "+area.icon+" "+area.name)]),
         div("",{style:{padding:"4px 16px 16px"}},[
           el("div",{style:{fontFamily:"'Lora',serif",fontSize:"16px",fontWeight:"500",color:"var(--ink)",marginBottom:"10px",paddingBottom:"10px",borderBottom:"1px solid var(--border)"}},g.statement||g.what),
           div("",allTacs.map(function(t){return div("",{style:{display:"flex",alignItems:"flex-start",gap:"7px",marginBottom:"6px",fontSize:"14px",color:"var(--ink-m)"}},[el("div",{class:"tactic-dot",style:{marginTop:"6px"}},null),document.createTextNode(t)]);}))
@@ -1521,20 +1521,20 @@ function buildVisionGoals(){
   return div("",[el("div",{class:"hdr"},[el("div",{class:"hdr-title"},"Vision & Goals"),el("div",{class:"hdr-sub"},"Your 3-year picture and 12-week plan")]),tabRow,content,bottomNav()]);
 }
 
-/* ══════════════════════════════════════════
+/* ==========================================
    MEASURES
-══════════════════════════════════════════ */
+========================================== */
 function buildMeasures(){
   var goalRows=(S.wiz.goals||[]).filter(function(g){return g.statement||g.what;}).map(function(g){
     var allTacs=[].concat((g.tactics||[]).filter(function(t){return t.selected;}),(g.custom||[]).filter(function(t){return t.text;}));
     var area=getArea(g.areaId);
-    return div("m-row",[div("m-left",[el("div",{class:"m-goal"},area.icon+" "+(g.what||g.statement)),el("div",{class:"m-track"},allTacs.length+" tactics · "+({daily:"daily",few:"a few times/week",once:"weekly"}[g.freq]||"weekly"))]),el("div",{class:"m-target"},g.measure?g.measure.split(" ").slice(0,3).join(" ")+"…":"On track")]);
+    return div("m-row",[div("m-left",[el("div",{class:"m-goal"},area.icon+" "+(g.what||g.statement)),el("div",{class:"m-track"},allTacs.length+" tactics  .  "+({daily:"daily",few:"a few times/week",once:"weekly"}[g.freq]||"weekly"))]),el("div",{class:"m-target"},g.measure?g.measure.split(" ").slice(0,3).join(" ")+"…":"On track")]);
   });
   var universal=[
     {goal:"Morning reflection",track:"Days completed",target:"7/7"},
     {goal:"Daily planning",track:"Days with a written plan",target:"5-7"},
     {goal:"Weekly review",track:"Weeks scored honestly",target:"Every week"},
-    {goal:"Weekly score",track:"Tasks done ÷ total tasks",target:"60%→80%"}
+    {goal:"Weekly score",track:"Tasks done divided by total tasks",target:"60%→80%"}
   ];
   return div("",[
     el("div",{class:"hdr"},[el("div",{class:"hdr-title"},"Lead Measures"),el("div",{class:"hdr-sub"},"Track these weekly, not just outcomes")]),
@@ -1545,9 +1545,9 @@ function buildMeasures(){
   ].filter(Boolean));
 }
 
-/* ══════════════════════════════════════════
+/* ==========================================
    REFERENCE
-══════════════════════════════════════════ */
+========================================== */
 function buildReference(){
   var sections=REFERENCE.map(function(sec,si){
     var open=!!S.refOpen[si];
@@ -1560,9 +1560,9 @@ function buildReference(){
   return div("",[el("div",{class:"hdr"},[el("div",{class:"hdr-title"},"Reference"),el("div",{class:"hdr-sub"},"The 12 Week Year methodology & tips")]),div("spacer",null),div("",sections),bottomNav()]);
 }
 
-/* ══════════════════════════════════════════
+/* ==========================================
    PARKING LOT
-══════════════════════════════════════════ */
+========================================== */
 function buildParking(){
   if(!S.parking) S.parking=[];
   var items=S.parking.map(function(p,i){
@@ -1583,58 +1583,49 @@ function buildParking(){
   ]);
 }
 
-/* ══════════════════════════════════════════
+/* ==========================================
    BEFORE WEEK 1 DATA
-══════════════════════════════════════════ */
+========================================== */
 function getBW1(){
-  // Task 2 detail is generated from the user's actual goals
   var goals=(S.wiz&&S.wiz.goals)||[];
   var activeGoals=goals.filter(function(g){return g.statement||g.what;});
+  var freqMap={daily:"every day",few:"a few times a week",once:"once a week"};
 
-  var calendarDetail="";
+  var calendarDetail;
   if(activeGoals.length){
-    var freqLabel={daily:"every day",few:"a few times a week",once:"once a week"};
     var lines=activeGoals.map(function(g){
       var area=getArea(g.areaId);
-      var freq=freqLabel[g.freq||"few"]||"a few times a week";
-      return """+area.icon+" "+(g.what||g.statement)+"" — block "+freq+", same time each occurrence, label it exactly this.";
+      var freq=freqMap[g.freq||"few"]||"a few times a week";
+      var goalText=g.what||g.statement;
+      return area.icon+" "+goalText+" - block "+freq+", same time every occurrence, label it with this exact goal name.";
     });
-    calendarDetail="Open your calendar app and create a recurring block for each goal below. Set each block for the same time every occurrence. When the block appears, you work — no deliberation, no deciding. You are pre-committing right now so Week 1 Day 1 requires zero decisions about when to start.
-
-"+lines.join("
-
-");
+    calendarDetail="Open your calendar app and create a recurring block for each of your goals below. Set each block for the same time every day or week. When the block appears, you work - no decision required. You are pre-committing right now so Week 1 Day 1 requires zero deliberation about when to start."+
+      "\n\n"+lines.join("\n\n");
   } else {
-    calendarDetail="Open your calendar app and create a recurring time block for each of your goals. Label each block with the goal name. Set them for the same time every occurrence. When the block appears, you work — no deliberation required.";
+    calendarDetail="Open your calendar app and create a recurring time block for each of your goals. Label each block with the goal name. Set them for the same time every occurrence. When the block appears, you work - no deliberation required.";
   }
 
-  // Task 3: show their goals as a preview to read
-  var readDetail="";
+  var readDetail;
   if(activeGoals.length){
-    var goalSummary=activeGoals.map(function(g,i){
+    var summaryLines=activeGoals.map(function(g,i){
       var area=getArea(g.areaId);
       var allTacs=[].concat(
         (g.tactics||[]).filter(function(t){return t.selected;}).map(function(t){return t.text;}),
         (g.custom||[]).filter(function(t){return t.text;}).map(function(t){return t.text;})
       );
-      return "Goal "+(i+1)+": "+(g.statement||g.what)+"
-Weekly tactics: "+(allTacs.join(", ")||"none set yet");
-    }).join("
-
-");
-    readDetail="Read your goals and tactics below until you could describe them from memory. When Week 1 starts, nothing should surprise you — you already know what every day looks like.
-
-"+goalSummary+"
-
-Then mentally walk through a typical Monday, Tuesday, Wednesday in Week 1. Where does each tactic fit? What time of day? What will you do first? The more vividly you picture it, the more automatic it becomes on Day 1.";
+      var tacText=allTacs.length?allTacs.join(", "):"no tactics set yet";
+      return "Goal "+(i+1)+": "+(g.statement||g.what)+"\nTactics: "+tacText;
+    });
+    readDetail="Read your goals and tactics below until you could describe them from memory. Then picture a typical Monday, Tuesday, and Wednesday in Week 1 - where does each tactic fit? When and where will you do it? The more vividly you picture it, the more automatic it becomes on Day 1."+
+      "\n\n"+summaryLines.join("\n\n");
   } else {
-    readDetail="Open the Vision tab. Read your goal statements out loud. Read every tactic. Walk through a typical Monday, Tuesday, Wednesday in Week 1. Picture exactly when and where you will do each tactic. The more vividly you picture it, the more automatic it becomes on Day 1.";
+    readDetail="Open the Vision tab. Read your goal statements and every tactic out loud. Then walk through a typical Monday, Tuesday, and Wednesday in Week 1. Picture exactly when and where you will do each tactic. The more vividly you picture it, the more automatic it becomes on Day 1.";
   }
 
   return [
     {id:"bw1_0",
      label:"Clear and set up your workspace",
-     detail:"Pick one spot in your home where you will do your goal work every day. It does not have to be a dedicated office — a corner of a table is enough. Clear it completely right now. Place your planner, a pen, and anything you need within arm's reach. The rule: this surface is always clear when you are not working. Setup and teardown take zero time because nothing moves."},
+     detail:"Pick one spot in your home where you will do your goal work every day. It does not have to be a dedicated office - a corner of a table is enough. Clear it completely right now. Place your planner, a pen, and anything you need within arm's reach. The rule: this surface is always clear when you are not working. Setup and teardown take zero time because nothing moves."},
     {id:"bw1_1",
      label:"Block your goal time in your calendar",
      detail:calendarDetail},
@@ -1643,7 +1634,7 @@ Then mentally walk through a typical Monday, Tuesday, Wednesday in Week 1. Where
      detail:readDetail},
     {id:"bw1_3",
      label:"Tell one person you are starting and set a check-in date",
-     detail:"Text or call one person — a friend, family member, or colleague — and tell them two things: what your main goal is for the next 12 weeks, and a specific date you will check in with them to share your progress. Do not be vague. Say the goal out loud and name the date. This creates a real social commitment. Stated accountability with a specific date is one of the strongest predictors of follow-through."}
+     detail:"Text or call one person and tell them two things: what your main goal is for the next 12 weeks, and a specific date you will check in with them to share your progress. Do not be vague. Say the goal out loud and name the date. This creates a real social commitment. Stated accountability with a specific date is one of the strongest predictors of follow-through."}
   ];
 }
 
@@ -1651,9 +1642,9 @@ function bw1Done(){
   return getBW1().every(function(t){return S.checked[t.id]==="done";});
 }
 
-/* ══════════════════════════════════════════
+/* ==========================================
    ORIENTATION SCREEN
-══════════════════════════════════════════ */
+========================================== */
 function buildOrientation(){
   var name=S.wiz.routine&&S.wiz.routine.name;
 
@@ -1668,7 +1659,7 @@ function buildOrientation(){
 
   // Before Week 1
   el_section(body,"Before you start: Before Week 1");
-  body.appendChild(orientCard("📋","Before Week 1 — not Week 1","Your 12 weeks have not started yet. Before Week 1 is a preparation phase that sits outside your scored sprint. It has one job: remove every obstacle that would slow down Week 1 Day 1. Four tasks. No goal work. Just friction removal."));
+  body.appendChild(orientCard("📋","Before Week 1 -- not Week 1","Your 12 weeks have not started yet. Before Week 1 is a preparation phase that sits outside your scored sprint. It has one job: remove every obstacle that would slow down Week 1 Day 1. Four tasks. No goal work. Just friction removal."));
   body.appendChild(div("orient-restriction",[
     el("span",{class:"orient-restriction-icon"},"🔒"),
     el("div",null,"Today and your weekly scorecard are locked until Before Week 1 is complete. You can access Vision, Reference, and Parking at any time.")
@@ -1680,14 +1671,14 @@ function buildOrientation(){
 
   // Daily use
   el_section(body,"How to use this every day");
-  body.appendChild(orientCard("☀️","Open Today first thing","Set your energy level — Low, Medium, or High. This filters your task list automatically. On low energy days only your essential habits appear. Work through tasks top to bottom. Tap a task label to see full instructions."));
-  body.appendChild(orientCard("✓  ✕","Done vs skipped","Tap ✓ when you complete a task. Tap ✕ when you did not — that is honest accounting, not failure. Both matter. Your weekly score is tasks done divided by total tasks. Skipped tasks count against your score. This keeps the data honest."));
-  body.appendChild(orientCard("✎  🗑","Edit and delete","Tap the pencil to rename or rewrite any task. Tap the bin to remove it permanently. Deleted tasks do not affect your score at all — use delete for tasks that were never relevant to you, and skip for tasks you should have done but did not."));
+  body.appendChild(orientCard("☀️","Open Today first thing","Set your energy level -- Low, Medium, or High. This filters your task list automatically. On low energy days only your essential habits appear. Work through tasks top to bottom. Tap a task label to see full instructions."));
+  body.appendChild(orientCard("✓  ✕","Done vs skipped","Tap ✓ when you complete a task. Tap ✕ when you did not -- that is honest accounting, not failure. Both matter. Your weekly score is tasks done divided by total tasks. Skipped tasks count against your score. This keeps the data honest."));
+  body.appendChild(orientCard("✎  🗑","Edit and delete","Tap the pencil to rename or rewrite any task. Tap the bin to remove it permanently. Deleted tasks do not affect your score at all -- use delete for tasks that were never relevant to you, and skip for tasks you should have done but did not."));
   body.appendChild(orientCard("➕","Add your own tasks","At the bottom of every day there is an Add a task field. Anything you add appears in your list and behaves exactly like a built-in task."));
 
   // Weekly rhythm
   el_section(body,"Your weekly rhythm");
-  body.appendChild(orientCard("📅","Every Sunday","Open Weeks — this unlocks after Before Week 1 is complete. Tap the current week, go to Week State, and score yourself honestly. Set your state for the coming week — Recovery, Stabilization, Maintenance, or Growth. Then read every task for next week so nothing surprises you on Monday."));
+  body.appendChild(orientCard("📅","Every Sunday","Open Weeks -- this unlocks after Before Week 1 is complete. Tap the current week, go to Week State, and score yourself honestly. Set your state for the coming week -- Recovery, Stabilization, Maintenance, or Growth. Then read every task for next week so nothing surprises you on Monday."));
   body.appendChild(orientCard("✦","Vision and Goals","Your 3-year vision and 12-week goal statements live in the Vision tab. Tap Edit at any time to go back into the setup and adjust anything. Your goals are not locked in."));
   body.appendChild(orientCard("🅿️","Parking Lot","Anything you want to remember but not act on right now goes here. Future ideas, deferred decisions, things for next cycle. Get them out of your head and into the Parking Lot so they do not clutter your execution."));
 
@@ -1715,9 +1706,9 @@ function orientCard(icon,title,body){
   ]);
 }
 
-/* ══════════════════════════════════════════
+/* ==========================================
    BEFORE WEEK 1 SCREEN
-══════════════════════════════════════════ */
+========================================== */
 function buildBeforeWeek1(){
   var tasks=getBW1();
   var done=tasks.filter(function(t){return S.checked[t.id]==="done";}).length;
@@ -1755,7 +1746,7 @@ function buildBeforeWeek1(){
   children.push(div("bw1-explainer",[
     el("div",{class:"bw1-explainer-eyebrow"},"Before Week 1"),
     el("div",{class:"bw1-explainer-title"},"Prepare. Don't execute."),
-    el("div",{class:"bw1-explainer-body"},"Your 12-week sprint has not started yet. These four tasks are about removing friction — not working toward your goals. Do not do any goal work here. Set up your space, block your time, read your plan, and tell someone you are starting. That is it. When all four are done, Week 1 unlocks automatically.")
+    el("div",{class:"bw1-explainer-body"},"Your 12-week sprint has not started yet. These four tasks are about removing friction -- not working toward your goals. Do not do any goal work here. Set up your space, block your time, read your plan, and tell someone you are starting. That is it. When all four are done, Week 1 unlocks automatically.")
   ]));
 
   // Locked notice
@@ -1773,7 +1764,7 @@ function buildBeforeWeek1(){
     ])
   ]));
 
-  // Tasks — use the same taskItem pattern but with bw1 styling
+  // Tasks -- use the same taskItem pattern but with bw1 styling
   children.push(div("card-wrap",tasks.map(function(task){
     return bw1TaskItem(task);
   })));
@@ -1816,9 +1807,9 @@ function bw1TaskItem(task){
   return item;
 }
 
-/* ══════════════════════════════════════════
+/* ==========================================
    ROUTER
-══════════════════════════════════════════ */
+========================================== */
 function buildView(){
   var wrap=div("",null);
   if(!S.setupDone){wrap.appendChild(buildWizard());return wrap;}
