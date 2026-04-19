@@ -578,6 +578,7 @@ function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2
 
 var S={
   setupDone:false,
+  prevView:null,
   wiz:{
     step:0,
     // steps: 0=welcome 1=areas 2=vision 3=smart 4=tactics 5=routine 6=review
@@ -615,6 +616,16 @@ function load(){
 }
 function persist(){
   try{localStorage.setItem("my12wy_v2",JSON.stringify(S));}catch(e){}
+}
+function goBack(){
+  // Navigate to previous view, with sensible fallbacks
+  var dest=S.prevView||"today";
+  // If prev was orientation/beforeWeek1/weekDetail, fall back to weeks or today
+  if(dest==="orientation"||dest==="weekDetail") dest="weeks";
+  if(dest==="beforeWeek1") dest="weeks";
+  S.prevView=S.view;
+  S.view=dest;
+  persist();render();
 }
 function render(){
   var a=document.getElementById("app");a.innerHTML="";a.appendChild(buildView());
@@ -1370,7 +1381,7 @@ function bottomNav(){
           // so they understand what needs to be done first
           S.view="beforeWeek1";persist();render();return;
         }
-        S.view=item.v;persist();render();
+        S.prevView=S.view;S.view=item.v;persist();render();
       }
     },[
       div("bn-icon",item.locked?"🔒":item.icon),
@@ -1622,7 +1633,7 @@ function buildVisionGoals(){
     });
     content=div("",[div("spacer",null),goalCards.length?div("",goalCards):div("empty-state","No goals set yet."),btn("edit-plan-btn","Edit goals & tactics →",function(){S.setupDone=false;S.wiz.step=WIZ.indexOf("smart");S.wiz.smartGoalIdx=0;persist();render();})]);
   }
-  return div("",[el("div",{class:"hdr"},[el("div",{class:"hdr-title"},"Vision & Goals"),el("div",{class:"hdr-sub"},"Your 3-year picture and 12-week plan")]),tabRow,content,bottomNav()]);
+  return div("",[btn("back-btn","← Back",goBack),el("div",{class:"hdr"},[el("div",{class:"hdr-title"},"Vision & Goals"),el("div",{class:"hdr-sub"},"Your 3-year picture and 12-week plan")]),tabRow,content,bottomNav()]);
 }
 
 /* ==========================================
@@ -1641,6 +1652,7 @@ function buildMeasures(){
     {goal:"Weekly score",track:"Tasks done divided by total tasks",target:"60%→80%"}
   ];
   return div("",[
+    btn("back-btn","← Back",goBack),
     el("div",{class:"hdr"},[el("div",{class:"hdr-title"},"Lead Measures"),el("div",{class:"hdr-sub"},"Track these weekly, not just outcomes")]),
     div("spacer",null),
     goalRows.length?div("card-wrap",goalRows):null,
@@ -1661,7 +1673,48 @@ function buildReference(){
     if(open) section.appendChild(div("ref-body",sec.items.map(function(item){return div("ref-item",[el("span",{class:sec.tag==="method"?"method-tag":"tip-tag"},sec.tag==="method"?"Method":"Tip"),el("div",{class:"ref-item-title"},item.title),el("div",{class:"ref-item-body"},item.body)]);})));
     return section;
   });
-  return div("",[el("div",{class:"hdr"},[el("div",{class:"hdr-title"},"Reference"),el("div",{class:"hdr-sub"},"The 12 Week Year methodology & tips")]),div("spacer",null),div("",sections),bottomNav()]);
+  // Settings section
+  var resetSection=div("ref-section",{style:{margin:"8px 14px"}},[
+    div("ref-head",[
+      el("div",{class:"ref-title"},"Settings & reset"),
+      el("div",{class:"ref-arrow"+(S.refOpen["settings"]?" open":"")},">")
+    ])
+  ]);
+  resetSection.querySelector(".ref-head").addEventListener("click",function(){
+    S.refOpen["settings"]=!S.refOpen["settings"];persist();render();
+  });
+  if(S.refOpen["settings"]){
+    var resetBody=div("ref-body",[
+      div("ref-item",[
+        el("div",{class:"ref-item-title"},"Reset progress only"),
+        el("div",{class:"ref-item-body",style:{marginBottom:"10px"}},"Clears all task completions and weekly scores. Keeps your vision, goals, and tactics exactly as they are. Use this to start a fresh 12-week cycle with the same plan."),
+        btn("",{style:{padding:"8px 16px",background:"var(--gold-p)",border:"1px solid rgba(122,92,16,0.3)",borderRadius:"8px",fontFamily:"'Crimson Pro',serif",fontSize:"13px",color:"var(--gold)",cursor:"pointer",width:"100%",textAlign:"center"}},"Reset progress → keep my plan",function(){
+          if(!confirm("This will clear all task completions and scores. Your goals and vision stay. Are you sure?")) return;
+          S.checked={};S.wscore={};S.wstate={};S.openTasks={};S.customTasks={};S.edits={};S.deleted={};
+          persist();alert("Progress cleared. Your plan is unchanged.");render();
+        })
+      ]),
+      div("ref-item",[
+        el("div",{class:"ref-item-title"},"Reset everything"),
+        el("div",{class:"ref-item-body",style:{marginBottom:"10px"}},"Clears your entire plan including vision, goals, tactics, and all progress. Returns to the setup wizard. Use this to start completely fresh or hand the app to someone else."),
+        btn("",{style:{padding:"8px 16px",background:"var(--skip-p)",border:"1px solid rgba(179,48,48,0.25)",borderRadius:"8px",fontFamily:"'Crimson Pro',serif",fontSize:"13px",color:"var(--skip)",cursor:"pointer",width:"100%",textAlign:"center"}},"Reset everything → restart wizard",function(){
+          if(!confirm("This will delete your entire plan, all goals, vision, and progress. This cannot be undone. Are you sure?")) return;
+          localStorage.removeItem("my12wy_v2");
+          location.reload();
+        })
+      ])
+    ]);
+    resetSection.appendChild(resetBody);
+  }
+
+  return div("",[
+    btn("back-btn","← Back",goBack),
+    el("div",{class:"hdr"},[el("div",{class:"hdr-title"},"Reference"),el("div",{class:"hdr-sub"},"Methodology, tips & settings")]),
+    div("spacer",null),
+    div("",sections),
+    resetSection,
+    bottomNav()
+  ]);
 }
 
 /* ==========================================
@@ -1679,6 +1732,7 @@ function buildParking(){
     S.parking.push({tag:tagInp.value.trim()||"Note",text:t});persist();tagInp.value="";textInp.value="";render();
   });
   return div("",[
+    btn("back-btn","← Back",goBack),
     el("div",{class:"hdr"},[el("div",{class:"hdr-title"},"Parking Lot"),el("div",{class:"hdr-sub"},"Deferred decisions and future ideas")]),
     div("spacer",null),
     items.length?div("card-wrap",items):div("empty-state","Nothing parked yet. Use this for decisions you are not ready to make, ideas for your next cycle, or anything you want to remember but not act on now."),
@@ -1761,6 +1815,11 @@ function buildOrientation(){
     el("div",{class:"orient-banner-body"},"Read this once before you start. It covers everything you need to use the app confidently every day.")
   ]));
 
+  // Back to wizard
+  body.appendChild(btn("back-btn","← Edit my plan",function(){
+    S.setupDone=false;S.wiz.step=WIZ.indexOf("review");persist();render();
+  }));
+
   // Before Week 1
   el_section(body,"Before you start: Before Week 1");
   body.appendChild(orientCard("📋","Before Week 1 -- not Week 1","Your 12 weeks have not started yet. Before Week 1 is a preparation phase that sits outside your scored sprint. It has one job: remove every obstacle that would slow down Week 1 Day 1. Four tasks. No goal work. Just friction removal."));
@@ -1788,7 +1847,7 @@ function buildOrientation(){
 
   // CTA
   var ctaBtn=btn("wiz-next","Go to Before Week 1 →",function(){
-    S.view="beforeWeek1";persist();render();
+    S.prevView="orientation";S.view="beforeWeek1";persist();render();
   });
   ctaBtn.style.cssText="display:block;width:100%;margin-top:8px;";
   body.appendChild(ctaBtn);
@@ -1830,8 +1889,11 @@ function buildBeforeWeek1(){
 
   // Header
   children.push(div("bw1-header",[
-    div("bw1-title","Before Week 1"),
-    el("div",{class:"bw1-sub"},done+" of "+total+" complete")
+    div("hdr-row",[
+      div("bw1-title","Before Week 1"),
+      el("div",{class:"bw1-sub"},done+" of "+total+" complete")
+    ]),
+    btn("back-btn","← Back",function(){S.view="weeks";persist();render();})
   ]));
 
   // Unlock celebration
