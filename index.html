@@ -1674,34 +1674,42 @@ function buildReference(){
     return section;
   });
   // Settings section
-  var resetSection=div("ref-section",{style:{margin:"8px 14px"}},[
-    div("ref-head",[
-      el("div",{class:"ref-title"},"Settings & reset"),
-      el("div",{class:"ref-arrow"+(S.refOpen["settings"]?" open":"")},">")
-    ])
+  var resetSection=div("ref-section",null);
+  var resetHead=div("ref-head",[
+    el("div",{class:"ref-title"},"Settings & reset"),
+    el("div",{class:"ref-arrow"+(S.refOpen["settings"]?" open":"")},">")
   ]);
-  resetSection.querySelector(".ref-head").addEventListener("click",function(){
+  resetHead.addEventListener("click",function(){
     S.refOpen["settings"]=!S.refOpen["settings"];persist();render();
   });
+  resetSection.appendChild(resetHead);
   if(S.refOpen["settings"]){
+    var btnReset=el("button",{
+      style:{padding:"9px 16px",background:"var(--gold-p)",border:"1px solid rgba(122,92,16,0.3)",borderRadius:"8px",fontFamily:"'Crimson Pro',serif",fontSize:"13px",color:"var(--gold)",cursor:"pointer",width:"100%",textAlign:"center",marginTop:"8px"},
+      onClick:function(){
+        if(!confirm("This will clear all task completions and scores. Your goals and vision stay. Are you sure?")) return;
+        S.checked={};S.wscore={};S.wstate={};S.openTasks={};S.customTasks={};S.edits={};S.deleted={};
+        persist();render();
+      }
+    },"Reset progress, keep my plan");
+    var btnFull=el("button",{
+      style:{padding:"9px 16px",background:"var(--skip-p)",border:"1px solid rgba(179,48,48,0.25)",borderRadius:"8px",fontFamily:"'Crimson Pro',serif",fontSize:"13px",color:"var(--skip)",cursor:"pointer",width:"100%",textAlign:"center",marginTop:"8px"},
+      onClick:function(){
+        if(!confirm("This will delete your entire plan, all goals, vision, and progress. This cannot be undone. Are you sure?")) return;
+        localStorage.removeItem("my12wy_v2");
+        location.reload();
+      }
+    },"Reset everything, restart wizard");
     var resetBody=div("ref-body",[
       div("ref-item",[
         el("div",{class:"ref-item-title"},"Reset progress only"),
-        el("div",{class:"ref-item-body",style:{marginBottom:"10px"}},"Clears all task completions and weekly scores. Keeps your vision, goals, and tactics exactly as they are. Use this to start a fresh 12-week cycle with the same plan."),
-        btn("",{style:{padding:"8px 16px",background:"var(--gold-p)",border:"1px solid rgba(122,92,16,0.3)",borderRadius:"8px",fontFamily:"'Crimson Pro',serif",fontSize:"13px",color:"var(--gold)",cursor:"pointer",width:"100%",textAlign:"center"}},"Reset progress → keep my plan",function(){
-          if(!confirm("This will clear all task completions and scores. Your goals and vision stay. Are you sure?")) return;
-          S.checked={};S.wscore={};S.wstate={};S.openTasks={};S.customTasks={};S.edits={};S.deleted={};
-          persist();alert("Progress cleared. Your plan is unchanged.");render();
-        })
+        el("div",{class:"ref-item-body",style:{marginBottom:"8px"}},"Clears all task completions and weekly scores. Keeps your vision, goals, and tactics exactly as they are. Use this to start a fresh 12-week cycle with the same plan."),
+        btnReset
       ]),
       div("ref-item",[
         el("div",{class:"ref-item-title"},"Reset everything"),
-        el("div",{class:"ref-item-body",style:{marginBottom:"10px"}},"Clears your entire plan including vision, goals, tactics, and all progress. Returns to the setup wizard. Use this to start completely fresh or hand the app to someone else."),
-        btn("",{style:{padding:"8px 16px",background:"var(--skip-p)",border:"1px solid rgba(179,48,48,0.25)",borderRadius:"8px",fontFamily:"'Crimson Pro',serif",fontSize:"13px",color:"var(--skip)",cursor:"pointer",width:"100%",textAlign:"center"}},"Reset everything → restart wizard",function(){
-          if(!confirm("This will delete your entire plan, all goals, vision, and progress. This cannot be undone. Are you sure?")) return;
-          localStorage.removeItem("my12wy_v2");
-          location.reload();
-        })
+        el("div",{class:"ref-item-body",style:{marginBottom:"8px"}},"Clears your entire plan including vision, goals, tactics, and all progress. Returns to the setup wizard. Use this to start completely fresh or hand the app to someone else."),
+        btnFull
       ])
     ]);
     resetSection.appendChild(resetBody);
